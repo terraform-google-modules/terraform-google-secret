@@ -1,0 +1,17 @@
+{
+  "bindings": [
+    {
+      "role": "roles/owner",
+      "members": [
+        "user:mike@example.com",
+        "serviceAccount:835469197146-compute@developer.gserviceaccount.com"
+      ]
+    },
+    {
+      "role": "roles/viewer",
+      "members": ["user:sean@example.com"]
+    }
+  ],
+  "etag": "string",
+  "version": 1
+}

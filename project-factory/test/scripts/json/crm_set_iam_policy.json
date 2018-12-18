@@ -1,0 +1,16 @@
+{
+  "bindings": [
+    {
+      "role": "roles/owner",
+      "members": [
+        "user:mike@example.com"
+      ]
+    },
+    {
+      "role": "roles/viewer",
+      "members": ["user:sean@example.com"]
+    }
+  ],
+  "etag": "string",
+  "version": 1
+}

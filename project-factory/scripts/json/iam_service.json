@@ -1,0 +1,33 @@
+{
+  "description": "",
+  "resources": {
+    "projects": {
+      "resources": {
+        "serviceAccounts": {
+          "methods": {
+            "list": {
+              "httpMethod": "GET",
+              "id": "",
+              "parameters": {
+                "name": {}
+              },
+              "path": "",
+              "response": {}
+            },
+            "delete": {
+              "httpMethod": "DELETE",
+              "id": "",
+              "parameters": {
+                "name": {}
+              },
+              "path": "",
+              "response": {}
+            }
+          }
+        }
+      }
+      }
+  },
+  "rootUrl": "",
+  "servicePath": ""
+}
