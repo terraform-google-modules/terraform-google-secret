@@ -1,0 +1,27 @@
+---
+driver:
+  name: terraform
+
+provisioner:
+  name: terraform
+
+platforms:
+- name: gcp
+
+verifier:
+  name: terraform
+  # inspec_options: "-t gcp://"
+
+suites:
+  -
+    name: barebones
+    driver:
+      root_module_directory: examples/barebones-test-fixture
+      variables:
+        project_name: <%= ENV['PROJECT_NAME'] %>
+    verifier:
+      groups:
+        -
+          name: default
+          controls:
+            - common

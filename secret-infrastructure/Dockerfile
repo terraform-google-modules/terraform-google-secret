@@ -29,6 +29,8 @@ ARG GOOGLE_APPLICATION_CREDENTIALS
 ENV CREDENTIALS_FILE credentials.json
 COPY $GOOGLE_APPLICATION_CREDENTIALS $WORKDIR/$CREDENTIALS_FILE
 ENV GOOGLE_APPLICATION_CREDENTIALS=$WORKDIR/$CREDENTIALS_FILE
+ARG RANDOM_SUFFIX
+ENV RANDOM_SUFFIX=$RANDOM_SUFFIX
 
 RUN echo "alias tf_list=\"/bin/bash -l -c 'bundle exec kitchen list'\"" >> /root/.bashrc && \
     echo "alias tf_destroy=\"/bin/bash -l -c 'bundle exec kitchen destroy ; bundle exec kitchen list'\"" >> /root/.bashrc && \
