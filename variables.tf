@@ -24,7 +24,7 @@ variable "application_name" {
 
 variable "application_list" {
   description = "This of application names that will store secrets"
-  type = list
+  type = "list"
   default = []
 }
 

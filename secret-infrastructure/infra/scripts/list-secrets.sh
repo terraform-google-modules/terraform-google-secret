@@ -27,7 +27,7 @@ SECRETS_PROJECT="secrets"
 ROOT_FOLDER="./secrets/"
 
 # Reset the secrets folder
-rm -rf $ROOT_FOLDER
+rm -rf "$ROOT_FOLDER"
 
 echo "Generating list of secrets in $ROOT_FOLDER"
 
@@ -45,10 +45,10 @@ do
     FILE_PATH="$ROOT_FOLDER/$APP/$ENV.txt"
 
     # Make folder to hold secrets
-    mkdir -p $(dirname $FILE_PATH)
+    mkdir -p "$(dirname "$FILE_PATH")"
 
     # Print contents of bucket
-    BUCKET_ESCAPED=$(echo $BUCKET | sed -e 's/[]\/$*.^[]/\\&/g')
+    BUCKET_ESCAPED=$(echo "$BUCKET" | sed -e 's/[]\/$*.^[]/\\&/g')
     bucket_ls=$(gsutil ls "$BUCKET") || die "ERROR: Failed to get objects list from $BUCKET" 
-    echo "$bucket_ls" | sed "s/$BUCKET_ESCAPED\(.*\).txt/\1/" >> $FILE_PATH
+    echo "$bucket_ls" | sed "s/$BUCKET_ESCAPED\(.*\).txt/\1/" >> "$FILE_PATH"
 done

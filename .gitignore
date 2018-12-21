@@ -9,11 +9,11 @@
 .terraform.tfstate.d
 # Gemfile has occasionally pinned versions of gems that shouldn't be included (e.g. Could not find aws-sdk-core-2.11.92 in any of the sources)
 Gemfile.lock
-
+*.zip
 # JetBrains - PyCharm, IntelliJ, etc.
 .idea/
 __pycache__/
 *.iml
-
+*.json
 # Python
 *.pyc

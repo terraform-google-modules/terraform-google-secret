@@ -27,20 +27,20 @@ die () {
 
 JSON_FILE=$1
 
-for app_object in $(cat "${JSON_FILE}" | jq -r '.[] | @base64'); do
+for app_object in $(< "${JSON_FILE}" jq -r '.[] | @base64'); do
     _jq() {
-        echo ${app_object} | base64 --decode | jq -r "${1}"
+        echo "${app_object}" | base64 --decode | jq -r "${1}"
     }
 
     APP_NAME=$(_jq '.app')
     ENVS=$(_jq '.environments[]')
-    SECRETS=$(_jq '.secrets[]')
+#    SECRETS=$(_jq '.secrets[]')
 
     for SECRET_NAME in $(_jq '.secrets | keys[]'); do
         SECRET_VALUE=$(_jq ".secrets.$SECRET_NAME")
         for ENV in $ENVS; do
             echo "Setting $SECRET_NAME for $APP_NAME in $ENV"
-            ${BASH_SOURCE%/*}/set-secret.sh $APP_NAME $ENV $SECRET_NAME $SECRET_VALUE
+            "${BASH_SOURCE%/*}"/set-secret.sh "$APP_NAME" "$ENV" "$SECRET_NAME" "$SECRET_VALUE"
         done
     done
 done
