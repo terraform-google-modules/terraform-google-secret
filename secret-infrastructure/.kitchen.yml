@@ -7,6 +7,12 @@ provisioner:
 platforms:
   - name: gcp
 
+verifier:
+  name: terraform
+  systems:
+  - name: bucket
+    backend: local
+
 suites:
   - name: "bucket"
     driver:
@@ -15,9 +21,3 @@ suites:
         project_name: <%= ENV['PROJECT_NAME'] %>
         credentials_file_path: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
         random_suffix: <%= ENV['RANDOM_SUFFIX'] %>
-
-    verifier:
-      name: terraform
-      systems:
-      - name: bucket
-        backend: gcp

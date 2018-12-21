@@ -1,6 +1,5 @@
-variable "network_name" {
-  description = "name of network and subnetwork"
-  default     = "kt-test"
+variable "credentials_file_path" {
+  description = "path to creds"
 }
 
 variable "project_name" {

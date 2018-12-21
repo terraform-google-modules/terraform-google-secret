@@ -10,8 +10,8 @@ RUN apt-get update -y && \
     gem install bundler --no-ri --no-rdoc"
 
 RUN apt-get install -y unzip wget ssh git && \
-    wget https://releases.hashicorp.com/terraform/0.11.7/terraform_0.11.7_linux_amd64.zip && \
-    unzip terraform_0.11.7_linux_amd64.zip && \
+    wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip && \
+    unzip terraform_0.11.11_linux_amd64.zip && \
     mv terraform /usr/local/bin/
 
 RUN export CLOUD_SDK_REPO="cloud-sdk-$(lsb_release -c -s)" && \

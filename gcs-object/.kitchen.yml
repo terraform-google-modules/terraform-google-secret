@@ -10,18 +10,14 @@ platforms:
 
 verifier:
   name: terraform
-  # inspec_options: "-t gcp://"
+  systems:
+  - name: bucket
+    backend: local
 
 suites:
-  -
-    name: barebones
-    driver:
-      root_module_directory: examples/barebones-test-fixture
-      variables:
-        project_name: <%= ENV['PROJECT_NAME'] %>
-    verifier:
-      groups:
-        -
-          name: default
-          controls:
-            - common
+- name: "barebones"
+  driver:
+    root_module_directory: examples/barebones-test-fixture
+    variables:
+      project_name: <%= ENV['PROJECT_NAME'] %>
+      credentials_file_path: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
