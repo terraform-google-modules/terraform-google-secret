@@ -22,12 +22,6 @@ variable "application_name" {
   description = "The application to fetch secrets for"
 }
 
-variable "application_list" {
-  description = "This of application names that will store secrets"
-  type = "list"
-  default = []
-}
-
 variable "env" {
   description = "The environment to fetch secrets for"
 }

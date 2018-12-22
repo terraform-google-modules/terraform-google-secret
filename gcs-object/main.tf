@@ -72,3 +72,6 @@
 * ```
 **/
 
+resource "null_resource" "force-wait" {
+
+}

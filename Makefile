@@ -62,16 +62,6 @@ check_headers: ## Check that source files have appropriate boilerplate
 	@echo "Checking file headers"
 	@python test/verify_boilerplate.py
 
-# Integration tests
-.PHONY: test_integration
-test_integration: ## Run integration tests
-	bundle install
-	bundle exec kitchen create
-	bundle exec kitchen converge
-	bundle exec kitchen converge
-	bundle exec kitchen verify
-	bundle exec kitchen destroy
-
 .PHONY: generate_docs
 generate_docs: ## Update README documentation for Terraform variables and outputs
 	@source test/make.sh && generate_docs
@@ -82,9 +72,24 @@ version:
 	@source helpers/version-repo.sh
 
 
-.PHONY: test_integration_docker
-test_integration_docker: docker_create docker_converge docker_verify docker_destroy ## Run a full integration test cycle
-	@echo "Running test-kitchen tests in docker"
+.PHONY: test_integration
+.ONESHELL:
+test_integration:  ## Run a full integration test cycle
+	@echo "Copying service-account-credentials.json to test dirs"
+	cp service-account-credentials.json gcs-object/.
+	cp service-account-credentials.json secret-infrastructure/.
+	@echo Creating random string
+	@echo "Running gcs-object integration test"
+	cd gcs-object
+	docker build . -f Dockerfile -t ubuntu-test-kitchen-terraform --build-arg RANDOM_SUFFIX=$(shell openssl rand -hex 5) --build-arg PROJECT_NAME=${PROJECT_NAME} --build-arg GOOGLE_APPLICATION_CREDENTIALS=service-account-credentials.json
+	cd ..
+	@echo "Running secret-infrastructure integration test"
+	cd secret-infrastructure
+	docker build . -f Dockerfile -t ubuntu-test-kitchen-terraform --build-arg RANDOM_SUFFIX=$(shell openssl rand -hex 5) --build-arg PROJECT_NAME=${PROJECT_NAME} --build-arg GOOGLE_APPLICATION_CREDENTIALS=service-account-credentials.json
+	cd ..
+
+	@echo "Running overall test-kitchen in docker"
+	docker build . -f Dockerfile -t ubuntu-test-kitchen-terraform --build-arg RANDOM_SUFFIX=$(shell openssl rand -hex 5) --build-arg PROJECT_NAME=${PROJECT_NAME} --build-arg GOOGLE_APPLICATION_CREDENTIALS=service-account-credentials.json
 
 help: ## Prints help for targets with comments
 	@grep -E '^[a-zA-Z._-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'

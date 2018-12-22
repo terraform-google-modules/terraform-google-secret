@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-data "google_storage_object_signed_url" "file_url" {
-  bucket   = "${var.bucket}"
-  path     = "${var.path}"
-  duration = "${var.duration}"
+variable "project_name" {
+  description = "Name of test project"
 }
 
-data "http" "remote_contents" {
-  url = "${data.google_storage_object_signed_url.file_url.signed_url}"
-  depends_on = ["null_resource.force-wait"]
+variable "credentials_file_path" {
+  description = "Credentials for access"
+}
+
+variable "random_suffix" {
+  description = "random characters appended to bucket names for uniqueness in tests"
 }

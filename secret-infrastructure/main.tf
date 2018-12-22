@@ -33,6 +33,7 @@ resource "google_storage_bucket" "secrets" {
   versioning {
     enabled = true
   }
+  force_destroy = true
 }
 
 resource "google_storage_bucket" "app-secrets" {
@@ -43,4 +44,5 @@ resource "google_storage_bucket" "app-secrets" {
   versioning {
     enabled = true
   }
+  force_destroy = true
 }

@@ -14,13 +14,27 @@
  * limitations under the License.
  */
 
-data "google_storage_object_signed_url" "file_url" {
-  bucket   = "${var.bucket}"
-  path     = "${var.path}"
-  duration = "${var.duration}"
+//output "app-buckets" {
+//  value = ["${module.create-buckets.app-buckets}"]
+//}
+//
+//output "shared-buckets" {
+//  value = ["${module.create-buckets.shared-buckets}"]
+//}
+
+output "app-list" {
+  value = "${local.app_list}"
 }
 
-data "http" "remote_contents" {
-  url = "${data.google_storage_object_signed_url.file_url.signed_url}"
-  depends_on = ["null_resource.force-wait"]
+output "env-list" {
+  value = "${local.env_list}"
+}
+
+output "project-name" {
+  value = "${var.project_name}"
+}
+
+output "mysecret" {
+  value = "${module.fetch-secret-test.contents}"
+  sensitive = false
 }

@@ -1,0 +1,22 @@
+---
+name: bucket
+version: 0.1
+attributes:
+- name: app-buckets
+  required: true
+  type: array
+- name: shared-buckets
+  required: true
+  type: array
+- name: app-list
+  required: true
+  type: array
+- name: env-list
+  required: true
+  type: array
+- name: project-name
+  required: true
+  type: string
+- name: mysecret
+  required: true
+  type: string
