@@ -124,13 +124,6 @@ Be sure you have the correct Terraform version (0.10.x), you can choose the bina
 - [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) v1.10.0
 
 
-### Fast install (optional)
-For a fast install, please configure the variables on init_centos.sh  or init_debian.sh script and then launch it.
-
-The script will do:
-- Environment variables setting
-- Installation of base packages like wget, curl, unzip, gcloud, etc.
-
 ## Development
 
 ### File structure
@@ -140,7 +133,6 @@ The project has the following folders and files:
 - /examples: examples for using this module
 - /test: Folders with files for testing the module (see Testing section on this file)
 - /main.tf: main file for this module, contains primary logic for operate the module
-- /*_constraints.tf: files for manage the policy resources
 - /variables.tf: all the variables for the module
 - /output.tf: the outputs of the module
 - /readme.MD: this file
