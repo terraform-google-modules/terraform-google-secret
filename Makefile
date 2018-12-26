@@ -74,7 +74,7 @@ version:
 
 .PHONY: test_integration check-env
 .ONESHELL:
-test_integration:  ## Run a full integration test cycle
+test_integration: check-env  ## Run a full integration test cycle
 	@echo "Copying service-account-credentials.json to test dirs"
 	cp service-account-credentials.json gcs-object/.
 	cp service-account-credentials.json secret-infrastructure/.
@@ -96,5 +96,5 @@ help: ## Prints help for targets with comments
 
 check-env:
 ifndef PROJECT_NAME
-  $(error PROJECT_NAME is undefined)
+	$(error PROJECT_NAME is undefined)
 endif
