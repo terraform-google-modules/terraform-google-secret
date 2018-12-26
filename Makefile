@@ -72,7 +72,7 @@ version:
 	@source helpers/version-repo.sh
 
 
-.PHONY: test_integration
+.PHONY: test_integration check-env
 .ONESHELL:
 test_integration:  ## Run a full integration test cycle
 	@echo "Copying service-account-credentials.json to test dirs"
@@ -93,3 +93,8 @@ test_integration:  ## Run a full integration test cycle
 
 help: ## Prints help for targets with comments
 	@grep -E '^[a-zA-Z._-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+check-env:
+ifndef PROJECT_NAME
+  $(error PROJECT_NAME is undefined)
+endif
