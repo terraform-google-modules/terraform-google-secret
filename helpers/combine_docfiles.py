@@ -33,8 +33,10 @@ exclude_separator_regex = '(.*?)Copyright 20\d\d Google LLC.*?limitations under 
 
 if len(sys.argv) != 3:
   sys.exit(1)
-
-input = open(sys.argv[1], "r").read()
+try:
+  input = open(sys.argv[1], "r").read()
+except IOError as e:
+  sys.exit(1)
 replace_content = open(sys.argv[2], "r").read()
 
 # Exclude the specified content from the replacement content
@@ -42,6 +44,10 @@ groups = re.match(exclude_separator_regex, replace_content, re.DOTALL).groups(0)
 replace_content = groups[0] + groups[1]
 
 # Find where to put the replacement content, overwrite the input file
-groups = re.match(insert_separator_regex, input, re.DOTALL).groups(0)
-output = groups[0] + replace_content + groups[2]
+try:
+  groups = re.match(insert_separator_regex, input, re.DOTALL).groups(0)
+  output = groups[0] + replace_content + groups[2]
+except AttributeError as e:
+  sys.exit(1)
+
 open(sys.argv[1], "w").write(output)

@@ -19,7 +19,8 @@ Note this is all on a per environment basis as well.
 ## Usage
 Examples are included in the [examples](./examples/) folder.
 
-There are two key operations, creating the buckets, and fetching a secret.
+There are two key operations, creating the buckets, and fetching a secret. 
+Note that setting/storing a secret is a separate and out-of-band process. See [this readme for more information.](./secret-infrastructure/infra/README.md)
 
 The base module is to fetch a secret from already created buckets. 
 
