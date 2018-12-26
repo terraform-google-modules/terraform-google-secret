@@ -50,17 +50,17 @@ To control module's behavior, change variables' values regarding the following:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| application\_name | The application to fetch secrets for | string | - | yes |
-| credentials\_file\_path | The path to the GCP credentials | string | - | yes |
-| env | The environment to fetch secrets for | string | - | yes |
-| secret | The name of the secret to fetch | string | - | yes |
-| shared | Will we fetch the secret from the shared bucket instead of an application-specific bucket? | string | `false` | no |
+| application\_list | The list of application names that will store secrets | list | `<list>` | no |
+| credentials\_file\_path | GCP credentials fils | string | - | yes |
+| env\_list | The list of environments for secrets | list | `<list>` | no |
+| project\_name | The name of the project this applies to | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| contents | The contents of the requested GCS object |
+| app-buckets | - |
+| shared-buckets | - |
 
 [^]: (autogen_docs_end)
 

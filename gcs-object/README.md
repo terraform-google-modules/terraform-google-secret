@@ -20,17 +20,16 @@ To control module's behavior, change variables' values regarding the following:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| application\_name | The application to fetch secrets for | string | - | yes |
-| credentials\_file\_path | The path to the GCP credentials | string | - | yes |
-| env | The environment to fetch secrets for | string | - | yes |
-| secret | The name of the secret to fetch | string | - | yes |
-| shared | Will we fetch the secret from the shared bucket instead of an application-specific bucket? | string | `false` | no |
+| bucket | The bucket to fetch the object from | string | - | yes |
+| duration | The duration of the signed URL (defaults to 1m) | string | `1m` | no |
+| path | The path to the desired object within the bucket | string | - | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | contents | The contents of the requested GCS object |
+| url | - |
 
 [^]: (autogen_docs_end)
 
