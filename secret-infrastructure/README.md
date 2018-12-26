@@ -1,17 +1,47 @@
-# terraform-gcp-get-gcs-object
-# object fetching for Google Cloud GCS based secret management Terraform Module
+# terraform-google-secret/secret-infrastructure
 
-This is a submodule to fetch an object in a GCS bucket.
+# Bucket infrastructure for Google Cloud GCS based secret management Terraform Module
 
-## Example usage
-See the living [barebones](./examples/barebones-test-fixture) test fixture example for usage.
+This Terraform submodule handles the creation of buckets for storing app and shared secrets.
+
+
+## Usage
+An example is included under the root examples folder at [examples/bucket_example](../examples/bucket_example).
+
+### Creating the buckets
+
+A simple example to create buckets is as follows:
+
+```hcl
+module "secret-storage" {
+  source = "./secret-infrastructure"
+  project_name = "your-secret-storage-project"
+  application_list = ["webapp", "service1"]
+  env_list = ["dev", "qa", "production"]
+  credentials_file_path = "service-account-creds.json"
+}
+```
+This will create buckets with of the form: appname-env-secrets
+Using the above as an example, this will create:
+* webapp-dev-secrets
+* webapp-qa-secrets
+* webapp-prod-secrets
+* service1-dev-secrets
+* service1-qa-secrets
+* service1-prod-secrets
+
+Along with the shared buckets per environment
+* shared-projectname-dev-secrets
+* shared-projectname-qa-secrets
+* shared-projectname-prod-secrets
 
 #### Variables
 To control module's behavior, change variables' values regarding the following:
 
-- `bucket`: The name of the bucket you're fetching from
-- `path`: The path and file you're fetching
-- `duration`:  The file is fetched by creating a signed URL. This specifies how long the the URL is valid for.
+- `project_name`: The name of the project you're storing these secrets in. This name is also used for the shared secrets buckets.
+- `application_list`: The list of applications you're storing secrets for. A bucket will be created per application per environment.
+- `env_list`: The list of environments you're storing secrets for. As above, a bucket will be created per application per environment. A shared secret bucket will also be created for each environment.
+- `credentials_file_path`: The path to the service account JSON for the Google provider.
 
 
 [^]: (autogen_docs_start)
@@ -57,8 +87,8 @@ Be sure you have the correct Terraform version (0.10.x), you can choose the bina
 ### File structure
 The project has the following folders and files:
 
-- ./gcs-object: root folder
-- ./examples/barebones-test-fixture: example for using this module
+- ./secret-infrastructure: root folder
+- ../examples/bucket_example: example for using this module
 - ./test: Folders with files for testing the module (see Testing section on this file)
 - ./main.tf: main file for this module, contains primary logic for operate the module
 - ./variables.tf: all the variables for the module

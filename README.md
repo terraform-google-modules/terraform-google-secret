@@ -14,12 +14,38 @@ This Terraform module makes it easier to manage to manage secrets for your Googl
 Think api keys, tokens, etc.
 
 Specifically, this repo provides modules to store secrets in app specific GCS buckets, shared buckets, and to fetch the secrets as needed.
-Note this is all on a per environment basis.
+Note this is all on a per environment basis as well.
 
 ## Usage
 Examples are included in the [examples](./examples/) folder.
 
 There are two key operations, creating the buckets, and fetching a secret.
+
+The base module is to fetch a secret from already created buckets. 
+
+### Fetching a secret
+A simple example to fetch a secret is as follows: 
+
+```hcl
+module "fetch-secret" {
+  source = "./"
+  env = "${var.env}"
+  application_name = "${var.application_name}"
+  secret = "${var.secret}"
+  credentials_file_path = "${var.credentials_file_path}"
+}
+```
+#### Variables
+To control module's behavior, change variables' values regarding the following:
+
+- `env`: This is the value of the environment you're fetching a secret in.
+- `application_name`: The name of the application you're fetching a secret for.
+- `secret`: The name of the secret you're fetching (e.g. "api-key")
+- `credentials_file_path`: The path to the service account JSON for the Google provider.
+
+Creating the bucket infrastructure is a submodule in this repo. 
+
+### Creating the buckets
 
 A simple example to create buckets is as follows:
 
@@ -33,7 +59,7 @@ module "secret-storage" {
 }
 ```
 This will create buckets with of the form: appname-env-secrets
-Using the above as an example, you'll create:
+Using the above as an example, this will create:
 * webapp-dev-secrets
 * webapp-qa-secrets
 * webapp-prod-secrets
@@ -46,26 +72,17 @@ Along with the shared buckets per environment
 * shared-projectname-qa-secrets
 * shared-projectname-prod-secrets
 
-### Variables
+Specific submodule docs can be found [in the submodule](secret-infrastructure/README.md)
+
+#### Variables
 To control module's behavior, change variables' values regarding the following:
 
-- `constraint`: set this variable with the [constraint value](https://cloud.google.com/resource-manager/docs/organization-policy/org-policy-constraints#available_constraints) in the form `constraints/{constraint identifier}`. For example, `constraints/serviceuser.services`
-- `policy_type`: Specify either `boolean` for boolean policies or `list` for list policies. (default `list`)
-- Policy Root: set one of the following values to determine where the policy is applied:
-  - `organization_id`
-  - `project_id`
-  - `folder_id`
-- `exclude_folders`: a list of folder IDs to be excluded from this policy. These folders must be lower in the hierarchy than the policy root.
-- `exclude_projects`: a list of project IDs to be excluded from this policy. They must be lower in the hierarchy than the policy root.
-- Boolean policies (with `policy_type: "boolean"`) can set the following variables:
-  - `enforce`: if "true" the policy is enforced at the root, if "false" the policy is not enforced at the root. (default `true`)
-- List policies (with `policy_type: "list"`) can set **one of** the following variables. Only one may be set.
-  - `enforce`: if "true" policy will deny all, if "false" policy will allow all (default `true`)
-  - `allow`: list of values to include in the policy with ALLOW behavior
-  - `deny`: list of values to include in the policy with DENY behavior
-- List policies with allow or deny values require the length to be set ( a workaround for [this terraform issue](https://github.com/hashicorp/terraform/issues/10857))
-  - `allow_list_length`
-  - `deny_list_length`
+- `project_name`: The name of the project you're storing these secrets in. This name is also used for the shared secrets buckets.
+- `application_list`: The list of applications you're storing secrets for. A bucket will be created per application per environment.
+- `env_list`: The list of environments you're storing secrets for. As above, a bucket will be created per application per environment. A shared secret bucket will also be created for each environment.
+- `credentials_file_path`: The path to the service account JSON for the Google provider.
+
+
 
 [^]: (autogen_docs_start)
 
@@ -127,25 +144,58 @@ The project has the following folders and files:
 - /output.tf: the outputs of the module
 - /readme.MD: this file
 
+## Testing
+
 ### Requirements
-- [bats](https://github.com/sstephenson/bats) 0.4.0
-- [jq](https://stedolan.github.io/jq/) 1.5
+- [bundler](https://github.com/bundler/bundler)
+- [gcloud](https://cloud.google.com/sdk/install)
 - [terraform-docs](https://github.com/segmentio/terraform-docs/releases) 0.3.0
+- [docker](https://docker.com)
+- [openssl](https://www.openssl.org/) - This is only used to generate a random suffix for bucket names
 
-### Integration tests
-The integration tests for this module are built with bats, basically the test checks the following:
-- Perform `terraform init` command
-- Perform `terraform get` command
-- Perform `terraform plan` command and check that it'll create *n* resources, modify 0 resources and delete 0 resources
-- Perform `terraform apply -auto-approve` command and check that it has created the *n* resources, modified 0 resources and deleted 0 resources
-- Perform several `gcloud` commands and check the policies are in the desired state
-- Perform `terraform destroy -force` command and check that it has destroyed the *n* resources
+### Integration test
 
-Please edit the *test/integration/<list|boolean>_constraints/launch.sh* files in order to specify the test beahvior
+Integration tests are run though [test-kitchen](https://github.com/test-kitchen/test-kitchen), [kitchen-terraform](https://github.com/newcontext-oss/kitchen-terraform), and [InSpec](https://github.com/inspec/inspec).
 
-You can use the following command to run the integration tests in the folder */test/integration/<list|boolean>_constraints/*
 
-  `. launch.sh`
+The test-kitchen instances in `test/fixtures/` wrap identically-named examples in the `examples/` directory.
+
+#### Setup
+
+1. Configure the [test fixtures](#test-configuration)
+2. Download a Service Account key with the necessary permissions and put it in the repo's root directory with the name `service-account-credentials.json`.
+ Note that running the repo's integration tests (make test_integration) will copy the service-account-credentials.json file the root to each submodule.
+3. Run the tests. This will run the overall integration test, as well as the submodule integration tests.
+    ```bash
+       make test_integration
+    ```
+  
+4. To run a specific submodule integration test, see the README for that module. To run the overall integration test, do
+    ```bash
+    	docker build . -f Dockerfile -t ubuntu-test-kitchen-terraform --build-arg RANDOM_SUFFIX=$(shell openssl rand -hex 5) --build-arg PROJECT_NAME="sample-project-name" --build-arg GOOGLE_APPLICATION_CREDENTIALS=service-account-credentials.json
+    ```
+5. This will build and run the kitchen tests for the module. If something fails, you might need to adjust the last line in the Dockerfile, as the image isn't fully built until that line passes.
+6. Remove the kitchen call as needed, then connect to the docker tag for debugging.
+    ```bash
+       docker run -it -v $PWD:/root/live_workspace -e "PROJECT_NAME=sample-project-name" -w /root/live_workspace ubuntu-test-kitchen-terraform
+    ```
+
+    The module root directory will be loaded into the Docker container at `/root/live_workspace/`.
+    Run kitchen-terraform to test the infrastructure:
+    
+    1. `kitchen create` creates Terraform state and downloads modules, if applicable.
+    2. `kitchen converge` creates the underlying resources. Run `kitchen converge <INSTANCE_NAME>` to create resources for a specific test case.
+    3. `kitchen verify` tests the created infrastructure. Run `kitchen verify <INSTANCE_NAME>` to run a specific test case.
+    4. `kitchen destroy` tears down the underlying resources created by `kitchen converge`. Run `kitchen destroy <INSTANCE_NAME>` to tear down resources for a specific test case.
+
+#### Test configuration
+
+You must set the project name as an environment variable before running the tests. 
+```bash
+    export PROJECT_NAME="sample-project-name"
+```
+
+A random suffix of characters is also applied to bucket names to provide uniqueness in the tests, as GCS bucket names must be globally unique.
 
 ### Autogeneration of documentation from .tf files
 Run
@@ -165,7 +215,7 @@ run
 make -s
 ```
 
-The -s is for 'silent'. Successful output looks like this
+The -s is for 'silent'. Successful output looks like this, though there are currently failing files.
 
 ```
 Running shellcheck
@@ -179,7 +229,6 @@ Test passed - Verified all file Apache 2 headers
 The linters
 are as follows:
 * Shell - shellcheck. Can be found in homebrew
-* Python - flake8. Can be installed with 'pip install flake8'
 * Golang - gofmt. gofmt comes with the standard golang installation. golang
 is a compiled language so there is no standard linter.
 * Terraform - terraform has a built-in linter in the 'terraform validate'
