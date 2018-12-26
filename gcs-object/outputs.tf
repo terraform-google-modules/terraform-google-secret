@@ -18,7 +18,3 @@ output "contents" {
   description = "The contents of the requested GCS object"
   value       = "${data.http.remote_contents.body}"
 }
-
-output "url" {
-  value = "${data.google_storage_object_signed_url.file_url.signed_url}"
-}

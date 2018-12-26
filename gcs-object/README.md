@@ -29,7 +29,6 @@ To control module's behavior, change variables' values regarding the following:
 | Name | Description |
 |------|-------------|
 | contents | The contents of the requested GCS object |
-| url | - |
 
 [^]: (autogen_docs_end)
 
