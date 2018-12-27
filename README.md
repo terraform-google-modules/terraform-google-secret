@@ -67,16 +67,6 @@ Along with the shared buckets per environment
 
 Specific submodule docs can be found [in the submodule](secret-infrastructure/README.md)
 
-#### Variables
-To control module's behavior, change variables' values regarding the following:
-
-- `project_name`: The name of the project you're storing these secrets in. This name is also used for the shared secrets buckets.
-- `application_list`: The list of applications you're storing secrets for. A bucket will be created per application per environment.
-- `env_list`: The list of environments you're storing secrets for. As above, a bucket will be created per application per environment. A shared secret bucket will also be created for each environment.
-- `credentials_file_path`: The path to the service account JSON for the Google provider.
-
-
-
 [^]: (autogen_docs_start)
 
 ## Inputs
@@ -101,9 +91,6 @@ To control module's behavior, change variables' values regarding the following:
 ### Terraform plugins
 - [Terraform](https://www.terraform.io/downloads.html) 0.10.x
 - [terraform-provider-google](https://github.com/terraform-providers/terraform-provider-google) v1.10.0
-
-### Permissions
-In order to execute this module, the Service Account you run as must have the **Organization Policy Administrator** (`roles/orgpolicy.PolicyAdmin`) role.
 
 ## Install
 

@@ -6,14 +6,6 @@ This is a submodule to fetch an object in a GCS bucket.
 ## Example usage
 See the living [barebones](./examples/barebones-test-fixture) test fixture example for usage.
 
-#### Variables
-To control module's behavior, change variables' values regarding the following:
-
-- `bucket`: The name of the bucket you're fetching from
-- `path`: The path and file you're fetching
-- `duration`:  The file is fetched by creating a signed URL. This specifies how long the the URL is valid for.
-
-
 [^]: (autogen_docs_start)
 
 ## Inputs
