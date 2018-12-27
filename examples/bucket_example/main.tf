@@ -15,10 +15,9 @@
  */
 
 module "secret-storage" {
-  source = "../../secret-infrastructure"
-  project_name = "${var.project_name}"
-  application_list = "${var.application_list}"
-  env_list = "${var.env_list}"
+  source                = "../../secret-infrastructure"
+  project_name          = "${var.project_name}"
+  application_list      = "${var.application_list}"
+  env_list              = "${var.env_list}"
   credentials_file_path = "${var.credentials_file_path}"
 }
-

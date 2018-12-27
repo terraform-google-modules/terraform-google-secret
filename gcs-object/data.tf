@@ -21,6 +21,6 @@ data "google_storage_object_signed_url" "file_url" {
 }
 
 data "http" "remote_contents" {
-  url = "${data.google_storage_object_signed_url.file_url.signed_url}"
+  url        = "${data.google_storage_object_signed_url.file_url.signed_url}"
   depends_on = ["null_resource.force-wait"]
 }

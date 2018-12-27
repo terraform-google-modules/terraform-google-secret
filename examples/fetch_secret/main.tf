@@ -15,10 +15,9 @@
  */
 
 module "mysecret" {
-  source = "../../"
-  env = "${var.env}"
-  application_name = "${var.application_name}"
-  secret = "${var.secret}"
+  source                = "../../"
+  env                   = "${var.env}"
+  application_name      = "${var.application_name}"
+  secret                = "${var.secret}"
   credentials_file_path = "${var.credentials_file_path}"
 }
-

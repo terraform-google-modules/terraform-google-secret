@@ -15,6 +15,6 @@
  */
 
 output "mysecret" {
-  value = "${module.mysecret.contents}"
+  value     = "${module.mysecret.contents}"
   sensitive = true
 }

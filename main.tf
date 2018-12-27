@@ -21,17 +21,16 @@ provider "google" {
   credentials = "${file(var.credentials_file_path)}"
 }
 
-
 locals {
-//  secret_project = "${var.project_name}"
+  //  secret_project = "${var.project_name}"
   shared_bucket = "shared-${var.env}-secrets"
-  app_bucket = "${var.application_name}-${var.env}-secrets"
-  bucket_name = "${var.shared == "true" ? local.shared_bucket : local.app_bucket}"
-  object_path = "${var.secret}.txt"
+  app_bucket    = "${var.application_name}-${var.env}-secrets"
+  bucket_name   = "${var.shared == "true" ? local.shared_bucket : local.app_bucket}"
+  object_path   = "${var.secret}.txt"
 }
 
 module "secret" {
-  source   = "./gcs-object"
+  source = "./gcs-object"
   bucket = "${local.bucket_name}"
   path   = "${local.object_path}"
 }

@@ -35,6 +35,6 @@ output "project-name" {
 }
 
 output "mysecret" {
-  value = "${module.fetch-secret-test.contents}"
+  value     = "${module.fetch-secret-test.contents}"
   sensitive = false
 }

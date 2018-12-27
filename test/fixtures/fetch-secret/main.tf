@@ -15,32 +15,31 @@
  */
 
 locals {
-  app_name = "app1${var.random_suffix}"
-  app_list = ["app1${var.random_suffix}", "app2${var.random_suffix}"]
-  env_list = ["dev", "qa", "prod"]
-  file_path = "${path.module}/file.txt"
+  app_name     = "app1${var.random_suffix}"
+  app_list     = ["app1${var.random_suffix}", "app2${var.random_suffix}"]
+  env_list     = ["dev", "qa", "prod"]
+  file_path    = "${path.module}/file.txt"
   file_content = "${file(local.file_path)}"
 }
 
 resource "google_storage_bucket_object" "test-object" {
-  name       = "test-secret.txt"
-  content     = "${local.file_content}"
-  bucket     = "${element(module.create-buckets.app-buckets,0)}"
+  name    = "test-secret.txt"
+  content = "${local.file_content}"
+  bucket  = "${element(module.create-buckets.app-buckets,0)}"
 }
 
 module "create-buckets" {
-  source = "../../../secret-infrastructure"
-  project_name = "${var.project_name}"
+  source                = "../../../secret-infrastructure"
+  project_name          = "${var.project_name}"
   credentials_file_path = "${var.credentials_file_path}"
-  application_list = "${local.app_list}"
-  env_list = "${local.env_list}"
+  application_list      = "${local.app_list}"
+  env_list              = "${local.env_list}"
 }
 
 module "fetch-secret-test" {
-  source = "../../../"
+  source                = "../../../"
   credentials_file_path = "${var.credentials_file_path}"
-  application_name = "${local.app_name}"
-  secret = "test-secret"
-  env = "dev"
-
+  application_name      = "${local.app_name}"
+  secret                = "test-secret"
+  env                   = "dev"
 }

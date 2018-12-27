@@ -20,9 +20,9 @@ locals {
 }
 
 module "create-buckets" {
-  source = "../../../"
-  project_name = "${var.project_name}"
-  application_list = "${local.app_list}"
-  env_list = "${local.env_list}"
+  source                = "../../../"
+  project_name          = "${var.project_name}"
+  application_list      = "${local.app_list}"
+  env_list              = "${local.env_list}"
   credentials_file_path = "${var.credentials_file_path}"
 }
