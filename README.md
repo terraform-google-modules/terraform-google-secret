@@ -21,20 +21,13 @@ A simple example to fetch a secret is as follows:
 
 ```hcl
 module "fetch-secret" {
-  source = "./"
-  env = "${var.env}"
-  application_name = "${var.application_name}"
-  secret = "${var.secret}"
-  credentials_file_path = "${var.credentials_file_path}"
+  source = "github.com/terraform-google-modules/terraform-google-secret"
+  env = "dev"
+  application_name = "app1"
+  secret = "api-key"
+  credentials_file_path = "sservice-account-credentials.json"
 }
 ```
-#### Variables
-To control module's behavior, change variables' values regarding the following:
-
-- `env`: This is the value of the environment you're fetching a secret in.
-- `application_name`: The name of the application you're fetching a secret for.
-- `secret`: The name of the secret you're fetching (e.g. "api-key")
-- `credentials_file_path`: The path to the service account JSON for the Google provider.
 
 Creating the bucket infrastructure is a submodule in this repo. 
 
@@ -44,7 +37,7 @@ A simple example to create buckets is as follows:
 
 ```hcl
 module "secret-storage" {
-  source = "./secret-infrastructure"
+  source = "github.com/terraform-google-modules/terraform-google-secret/secret-infrastructure"
   project_name = "your-secret-storage-project"
   application_list = ["webapp", "service1"]
   env_list = ["dev", "qa", "production"]
