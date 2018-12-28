@@ -22,6 +22,11 @@ locals {
   file_content = "${file(local.file_path)}"
 }
 
+provider "google" {
+  credentials = "${file(var.credentials_file_path)}"
+}
+
+
 resource "google_storage_bucket_object" "test-object" {
   name    = "test-secret.txt"
   content = "${local.file_content}"
@@ -29,7 +34,7 @@ resource "google_storage_bucket_object" "test-object" {
 }
 
 module "create-buckets" {
-  source                = "../../../secret-infrastructure"
+  source                = "../../../modules/secret-infrastructure"
   project_name          = "${var.project_name}"
   credentials_file_path = "${var.credentials_file_path}"
   application_list      = "${local.app_list}"

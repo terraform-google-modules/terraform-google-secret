@@ -17,7 +17,3 @@ suites:
   - name: "bucket"
     driver:
       root_module_directory: test/fixtures/bucket
-      variables:
-        project_name: <%= ENV['PROJECT_NAME'] %>
-        credentials_file_path: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'] %>
-        random_suffix: <%= ENV['RANDOM_SUFFIX'] %>

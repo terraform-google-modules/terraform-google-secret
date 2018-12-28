@@ -30,7 +30,7 @@ locals {
 }
 
 module "secret" {
-  source = "./gcs-object"
+  source = "./modules/gcs-object"
   bucket = "${local.bucket_name}"
   path   = "${local.object_path}"
 }

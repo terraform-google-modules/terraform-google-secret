@@ -17,3 +17,6 @@
   There is nothing here as the data.tf contains the necessary logic.
 */
 
+resource "null_resource" "force-wait" {
+
+}

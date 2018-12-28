@@ -37,7 +37,7 @@ A simple example to create buckets is as follows:
 
 ```hcl
 module "secret-storage" {
-  source = "github.com/terraform-google-modules/terraform-google-secret/secret-infrastructure"
+  source = "github.com/terraform-google-modules/terraform-google-secret/modules/secret-infrastructure"
   project_name = "your-secret-storage-project"
   application_list = ["webapp", "service1"]
   env_list = ["dev", "qa", "production"]
@@ -115,52 +115,51 @@ The project has the following folders and files:
 - [bundler](https://github.com/bundler/bundler)
 - [gcloud](https://cloud.google.com/sdk/install)
 - [terraform-docs](https://github.com/segmentio/terraform-docs/releases) 0.3.0
-- [docker](https://docker.com)
-- [openssl](https://www.openssl.org/) - This is only used to generate a random suffix for bucket names
+
+### Autogeneration of documentation from .tf files
+Run
+```
+make generate_docs
+```
 
 ### Integration test
 
 Integration tests are run though [test-kitchen](https://github.com/test-kitchen/test-kitchen), [kitchen-terraform](https://github.com/newcontext-oss/kitchen-terraform), and [InSpec](https://github.com/inspec/inspec).
 
-
-The test-kitchen instances in `test/fixtures/` wrap identically-named examples in the `examples/` directory.
-
 #### Setup
 
 1. Configure the [test fixtures](#test-configuration)
-2. Download a Service Account key with the necessary permissions and put it in the repo's root directory with the name `service-account-credentials.json`.
- Note that running the repo's integration tests (make test_integration) will copy the service-account-credentials.json file the root to each submodule.
-3. Run the tests. This will run the overall integration test, as well as the submodule integration tests.
-    ```bash
-       make test_integration
-    ```
-  
-4. To run a specific submodule integration test, see the README for that module. To run the overall integration test, do
-    ```bash
-    	docker build . -f Dockerfile -t ubuntu-test-kitchen-terraform --build-arg RANDOM_SUFFIX=$(shell openssl rand -hex 5) --build-arg PROJECT_NAME="sample-project-name" --build-arg GOOGLE_APPLICATION_CREDENTIALS=service-account-credentials.json
-    ```
-5. This will build and run the kitchen tests for the module. If something fails, you might need to adjust the last line in the Dockerfile, as the image isn't fully built until that line passes.
-6. Remove the kitchen call as needed, then connect to the docker tag for debugging.
-    ```bash
-       docker run -it -v $PWD:/root/live_workspace -e "PROJECT_NAME=sample-project-name" -w /root/live_workspace ubuntu-test-kitchen-terraform
-    ```
+2. Download a Service Account key with the necessary permissions and put it in the module's root directory with the name `credentials.json`.
+3. Build the Docker containers for testing:
 
-    The module root directory will be loaded into the Docker container at `/root/live_workspace/`.
-    Run kitchen-terraform to test the infrastructure:
-    
-    1. `kitchen create` creates Terraform state and downloads modules, if applicable.
-    2. `kitchen converge` creates the underlying resources. Run `kitchen converge <INSTANCE_NAME>` to create resources for a specific test case.
-    3. `kitchen verify` tests the created infrastructure. Run `kitchen verify <INSTANCE_NAME>` to run a specific test case.
-    4. `kitchen destroy` tears down the underlying resources created by `kitchen converge`. Run `kitchen destroy <INSTANCE_NAME>` to tear down resources for a specific test case.
+  ```
+  CREDENTIALS_FILE="credentials.json" make docker_build_terraform
+  CREDENTIALS_FILE="credentials.json" make docker_build_kitchen_terraform
+  ```
+4. Run the testing container in interactive mode:
+
+  ```
+  make docker_run
+  ```
+
+  The module root directory will be loaded into the Docker container at `/cftk/workdir/`.
+5. Run kitchen-terraform to test the infrastructure:
+
+  1. `kitchen create` creates Terraform state and downloads modules, if applicable.
+  2. `kitchen converge` creates the underlying resources. Run `kitchen converge <INSTANCE_NAME>` to create resources for a specific test case.
+  3. `kitchen verify` tests the created infrastructure. Run `kitchen verify <INSTANCE_NAME>` to run a specific test case.
+  4. `kitchen destroy` tears down the underlying resources created by `kitchen converge`. Run `kitchen destroy <INSTANCE_NAME>` to tear down resources for a specific test case.
+
+Alternatively, you can simply run `CREDENTIALS_FILE="credentials.json"  make test_integration_docker` to run all the test steps non-interactively.
 
 #### Test configuration
 
-You must set the project name as an environment variable before running the tests. 
-```bash
-    export PROJECT_NAME="sample-project-name"
-```
+Each test-kitchen instance is configured with a `terraform.tfvars` file in the test fixture directory, e.g. `test/fixtures/fetch-secret/terraform.tfvars`.
+Similarly, each test fixture has a `variables.tf` to define these variables, and an `outputs.tf` to facilitate providing necessary information for `inspec` to locate and query against created resources.
 
-A random suffix of characters is also applied to bucket names to provide uniqueness in the tests, as GCS bucket names must be globally unique.
+For running the test fixture in docker `make test_integration_docker`, set the variable `credentials_file_path` to your filename as above, but with the path as follows 
+`credentials_file_path="/cftk/workdir/credentials.json`
+``
 
 ### Autogeneration of documentation from .tf files
 Run
