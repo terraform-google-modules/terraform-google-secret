@@ -14,7 +14,7 @@ Examples are included in the [examples](./examples/) folder.
 There are two key operations, creating the buckets, and fetching a secret. 
 Note that setting/storing a secret is a separate and out-of-band process. See [this readme for more information.](./secret-infrastructure/infra/README.md)
 
-The base module is to fetch a secret from already created buckets. 
+The base module is to fetch a secret from already created buckets. Submodules are for fetching a file from GCS, and creating the buckets. See [./modules](./modules)
 
 ### Fetching a secret
 A simple example to fetch a secret is as follows: 
@@ -108,6 +108,7 @@ The project has the following folders and files:
 - /variables.tf: all the variables for the module
 - /output.tf: the outputs of the module
 - /readme.MD: this file
+- /modules: submodules. See individual modules for README's.
 
 ## Testing
 
