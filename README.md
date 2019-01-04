@@ -2,7 +2,7 @@
 
 # Google Cloud GCS based secret management Terraform Module
 
-This Terraform module makes it easier to manage to manage secrets for your Google Cloud environment.
+This Terraform module makes it easier to manage to manage secrets for your Google Cloud environment,
 Think api keys, tokens, etc.
 
 Specifically, this repo provides modules to store secrets in app specific GCS buckets, shared buckets, and to fetch the secrets as needed.
