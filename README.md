@@ -207,7 +207,7 @@ In general, this repo is built to run in CI/CD. It's not usually appropriate to 
 The helpers/ directory has a basic concept for setting secrets. The code is here doesn't run as-is (bucket names will need to be adjusted, etc), but is provided as a way to think about setting secrets.
 Conceptually, secrets are set manually by a team authorized to perform this work. 
 
-The team would use the scripts/set-secrets.sh script to set the secret (see [below](#setting-secrets)). 
+The team would use the `helpers/set-secrets.sh` script to set the secret (see [below](#setting-secrets)). 
 
 In this scenario, the GCS buckets are the source of truth. It might be necessary to have a list of the secrets stored in source control for auditability. See [jenkins](#jenkins-automation). 
 
