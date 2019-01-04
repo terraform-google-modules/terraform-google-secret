@@ -2,8 +2,7 @@
 
 # Google Cloud GCS based secret management Terraform Module
 
-This Terraform module makes it easier to manage to manage secrets for your Google Cloud environment,
-Think api keys, tokens, etc.
+This Terraform module makes it easier to manage to manage secrets for your Google Cloud environment, such as api keys, tokens, etc.
 
 Specifically, this repo provides modules to store secrets in app specific GCS buckets, shared buckets, and to fetch the secrets as needed.
 Note this is all on a per environment basis as well.
@@ -12,9 +11,11 @@ Note this is all on a per environment basis as well.
 Examples are included in the [examples](./examples/) folder.
 
 There are two key operations, creating the buckets, and fetching a secret. 
-Note that setting/storing a secret is a separate and out-of-band process. See [this readme for more information.](./secret-infrastructure/infra/README.md)
+Note that setting/storing a secret is a separate and out-of-band process. See [this readme for more information.](./modules/secret-infrastructure/infra/README.md)
 
-The base module is to fetch a secret from already created buckets. Submodules are for fetching a file from GCS, and creating the buckets. See [./modules](./modules)
+The base module is to fetch a secret from already created buckets. Submodules are for fetching a file from GCS, and creating the buckets.
+The GCS fetching submodule is located at [./modules/secret-infrastructure](./modules/secret-infrastructure)
+The bucket creation submodule is located at [./modules/secret-infrastructure](./modules/secret-infrastructure)
 
 ### Fetching a secret
 A simple example to fetch a secret is as follows: 
@@ -260,18 +261,18 @@ Secrets which are no longer needed should be cleared using the secret clearing s
 A listing of all secrets managed by this module is generated with this command:
 
 ```
-./scripts/list-secrets.sh
+./helpers/list-secrets.sh
 ```
 
 ### Jenkins automation
 
-./jenkins is a pipeline with the goal of having an up to date capture of the defined secrets in source. The groovy script is triggered in Jenkins (via cron).
-This script calls list-secrets.sh, which fetches all the defined secrets. It then calls commit-list.sh to commit them to source control. All three of these files will need modification to work correctly in your environments. 
+[./helpers/jenkins](./helpers/jenkins) is a pipeline with the goal of having an up to date capture of the defined secrets in source. The groovy script is triggered in Jenkins (via cron).
+This script calls [list-secrets.sh](./helpers/list-secrets.sh), which fetches all the defined secrets. It then calls [commit-list.sh](./helpers/jenkins/commit-list.sh) to commit them to source control. All three of these files will need modification to work correctly in your environments. 
 
 ```
-./jenkins/default-update-secrets-list.groovy
+./helpers/jenkins/default-update-secrets-list.groovy
 ```
 
 ```
-./jenkins/commit-list.sh
+./helpers/jenkins/commit-list.sh
 ```
