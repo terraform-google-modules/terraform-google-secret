@@ -1,0 +1,19 @@
+driver:
+  name: terraform
+
+provisioner:
+  name: terraform
+
+platforms:
+  - name: gcp
+
+verifier:
+  name: terraform
+  systems:
+  - name: fetch-secret
+    backend: local
+
+suites:
+  - name: "fetch-secret"
+    driver:
+      root_module_directory: test/fixtures/fetch-secret
