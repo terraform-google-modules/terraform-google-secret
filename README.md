@@ -1,6 +1,4 @@
-# terraform-google-secret
-
-# Google Cloud GCS based secret management Terraform Module
+# [Google Cloud Storage secret management Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/secret/google/)
 
 This Terraform module makes it easier to manage to manage secrets for your Google Cloud environment, such as api keys, tokens, etc.
 
@@ -22,7 +20,9 @@ A simple example to fetch a secret is as follows:
 
 ```hcl
 module "fetch-secret" {
-  source = "github.com/terraform-google-modules/terraform-google-secret"
+  source  = "terraform-google-modules/secret/google"
+  version = "0.1.0"
+
   env = "dev"
   application_name = "app1"
   secret = "api-key"
@@ -38,13 +38,16 @@ A simple example to create buckets is as follows:
 
 ```hcl
 module "secret-storage" {
-  source = "github.com/terraform-google-modules/terraform-google-secret/modules/secret-infrastructure"
+  source  = "terraform-google-modules/secret/google//modules/secret-infrastructure"
+  version = "0.1.0"
+
   project_name = "your-secret-storage-project"
   application_list = ["webapp", "service1"]
   env_list = ["dev", "qa", "production"]
   credentials_file_path = "service-account-creds.json"
 }
 ```
+
 This will create buckets with of the form: appname-env-secrets
 Using the above as an example, this will create:
 * webapp-dev-secrets
