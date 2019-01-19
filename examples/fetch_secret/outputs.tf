@@ -15,6 +15,7 @@
  */
 
 output "mysecret" {
+  description = "The actual value of the requested secret"
   value     = "${module.mysecret.contents}"
   sensitive = true
 }

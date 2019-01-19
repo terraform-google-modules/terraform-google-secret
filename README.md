@@ -80,7 +80,7 @@ Specific submodule docs can be found [in the submodule](secret-infrastructure/RE
 
 | Name | Description |
 |------|-------------|
-| contents | The contents of the requested GCS object |
+| contents | The actual value of the requested secret |
 
 [^]: (autogen_docs_end)
 
