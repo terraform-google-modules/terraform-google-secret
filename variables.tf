@@ -32,6 +32,7 @@ variable "secret" {
 
 variable "shared" {
   description = "Will we fetch the secret from the shared bucket instead of an application-specific bucket?"
-  type        = "string"
+  type        = string
   default     = "false"
 }
+
