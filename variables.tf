@@ -35,4 +35,3 @@ variable "shared" {
   type        = string
   default     = "false"
 }
-

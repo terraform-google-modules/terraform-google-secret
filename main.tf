@@ -34,4 +34,3 @@ module "secret" {
   bucket = local.bucket_name
   path   = local.object_path
 }
-
