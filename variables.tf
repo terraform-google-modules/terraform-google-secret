@@ -16,6 +16,7 @@
 
 variable "credentials_file_path" {
   description = "The path to the GCP credentials"
+  default = null
 }
 
 variable "application_name" {

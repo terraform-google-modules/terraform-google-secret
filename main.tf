@@ -18,7 +18,7 @@
   Provider configuration
  *****************************************/
 provider "google" {
-  credentials = file(var.credentials_file_path)
+  credentials = var.credentials_file_path == null ? null : file(var.credentials_file_path)
 }
 
 locals {
