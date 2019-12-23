@@ -32,4 +32,5 @@ variable "project_name" {
 
 variable "credentials_file_path" {
   description = "GCP credentials fils"
+  default = null
 }

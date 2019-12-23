@@ -15,9 +15,10 @@
  */
 
 output "app-buckets" {
-  value = ["${google_storage_bucket.app-secrets.*.name}"]
+//  value = ["${google_storage_bucket.app-secrets.*.name}"]
+  value = [for bucket in google_storage_bucket.app-secrets : bucket.name]
 }
 
 output "shared-buckets" {
-  value = ["${google_storage_bucket.secrets.*.name}"]
+  value = [for bucket in google_storage_bucket.secrets : bucket.name]
 }
