@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-output "mysecret" {
-  description = "The actual value of the requested secret"
-  value     = "${module.mysecret.contents}"
-  sensitive = true
+
+variable "project_id" {
+  description = "The id of the project to create buckets in"
 }
+

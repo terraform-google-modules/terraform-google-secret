@@ -14,18 +14,7 @@
  * limitations under the License.
  */
 
-variable "application_name" {
-  description = "The application to fetch secrets for"
-}
-
-variable "credentials_file_path" {
-  description = "GCP credentials fils"
-}
-
-variable "env" {
-  description = "The environment to fetch secrets for"
-}
-
-variable "secret" {
-  description = "The name of the secret to fetch"
+module "secret-storage" {
+  source                = "../../../examples/manage-secrets"
+  project_id         = var.project_id
 }
