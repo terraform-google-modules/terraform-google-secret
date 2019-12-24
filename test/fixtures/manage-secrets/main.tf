@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-module "secret-storage" {
+module "example" {
   source                = "../../../examples/manage-secrets"
   project_id         = var.project_id
 }

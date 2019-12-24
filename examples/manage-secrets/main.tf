@@ -22,9 +22,9 @@ module "secret-storage" {
   env_list              = ["dev","qa","prod"]
 }
 
-// Upload secrets
-module "secret1" {
-  source = "../../modules/push-secret"
+// Create secrets
+module "secret" {
+  source = "../../modules/create-secret"
 
   module_depends_on = module.secret-storage.shared-buckets
   application_name = "app1"
@@ -35,15 +35,27 @@ module "secret1" {
   project_id = var.project_id
 }
 
-module "secret2" {
-  source = "../../modules/push-secret"
+module "secret_json" {
+  source = "../../modules/create-secret"
 
   module_depends_on = module.secret-storage.shared-buckets
-  application_name = "app3"
+  application_name = ""
   env = "dev"
-  secret = "secret2"
+  secret = "secret2.json"
   content_file = "${path.module}/secrets/secret2.json"
-  shared = false
+  shared = true
   project_id = var.project_id
+}
 
+module "fetch_secret" {
+  source = "../.."
+  application_name = "app1"
+  env = "qa"
+  secret = module.secret_json.secret_name
+  shared = true
+  project_id = var.project_id
+}
+
+output "content" {
+  value = module.fetch_secret.contents
 }

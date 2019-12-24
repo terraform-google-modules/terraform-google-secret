@@ -15,10 +15,11 @@
  */
 
 output "app-buckets" {
-//  value = ["${google_storage_bucket.app-secrets.*.name}"]
+  description = "The lists of created application-specific buckets"
   value = [for bucket in google_storage_bucket.app-secrets : bucket.name]
 }
 
 output "shared-buckets" {
+  description = "The lists of created shared buckets"
   value = [for bucket in google_storage_bucket.secrets : bucket.name]
 }

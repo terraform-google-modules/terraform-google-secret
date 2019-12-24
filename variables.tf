@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-variable "credentials_file_path" {
-  description = "The path to the GCP credentials"
-}
+//variable "credentials_file_path" {
+//  description = "The path to the GCP credentials"
+//}
 
 variable "application_name" {
   description = "The application to fetch secrets for"
@@ -32,6 +32,11 @@ variable "secret" {
 
 variable "shared" {
   description = "Will we fetch the secret from the shared bucket instead of an application-specific bucket?"
-  type        = "string"
+  type        = string
   default     = "false"
+}
+
+variable "project_id" {
+  description = "The id of the project sectre buckets belong to"
+  type = string
 }

@@ -16,5 +16,6 @@
 
 output "contents" {
   description = "The actual value of the requested secret"
-  value       = "${module.secret.contents}"
+//  value       = module.secret.contents
+  value = local.object_path
 }

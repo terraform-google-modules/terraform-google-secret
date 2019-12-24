@@ -24,10 +24,10 @@ provider "google" {
 }
 
 resource "google_storage_bucket" "secrets" {
-  for_each = toset([for env in var.env_list : substr(format("shared-%s-%s-secrets", var.project_name, env),0,64)])
+  for_each = toset([for env in var.env_list : substr(format("shared-%s-%s-secrets", var.project_id, env),0,64)])
   name          = each.key
   storage_class = "MULTI_REGIONAL"
-  project       = var.project_name
+  project       = var.project_id
 
   versioning {
     enabled = true
@@ -37,10 +37,10 @@ resource "google_storage_bucket" "secrets" {
 }
 
 resource "google_storage_bucket" "app-secrets" {
-  for_each      = toset([ for s in setproduct(var.application_list, var.env_list) : substr(format("%s-%s-%s-secrets", var.project_name, s[0], s[1]), 0, 64)])
+  for_each      = toset([ for s in setproduct(var.application_list, var.env_list) : substr(format("%s-%s-%s-secrets", var.project_id, s[0], s[1]), 0, 64)])
   name          = each.key
   storage_class = "MULTI_REGIONAL"
-  project       = var.project_name
+  project       = var.project_id
 
   versioning {
     enabled = true

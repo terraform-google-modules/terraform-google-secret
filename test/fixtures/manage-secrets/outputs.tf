@@ -14,3 +14,19 @@
  * limitations under the License.
  */
 
+output "secret1_name" {
+  description = "The name of the secret1 to use in tests"
+  value       = module.example.secret1_name
+}
+
+output "content" {
+  value = module.example.content
+}
+
+output "test1" {
+  value = module.example.test1
+}
+
+output "test2" {
+  value = module.example.test2
+}

@@ -14,3 +14,22 @@
  * limitations under the License.
  */
 
+output "secret1_name" {
+  description = "The name of the secret1 to use in tests"
+  value       = module.secret_json.secret_name
+}
+
+output "secret2_name" {
+  description = "The name of the secret1 to use in tests"
+  value       = module.secret_json.secret_name
+}
+
+output "test1" {
+
+  value       = module.secret_json.test1
+}
+
+output "test2" {
+
+  value       = module.secret_json.test2
+}

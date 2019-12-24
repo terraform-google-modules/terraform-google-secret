@@ -35,7 +35,7 @@ resource "google_storage_bucket_object" "test-object" {
 
 module "create-buckets" {
   source                = "../../../modules/secret-infrastructure"
-  project_name          = "${var.project_name}"
+  project_id          = "${var.project_name}"
   credentials_file_path = "${var.credentials_file_path}"
   application_list      = "${local.app_list}"
   env_list              = "${local.env_list}"

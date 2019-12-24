@@ -1,5 +1,5 @@
 /**
- * Copyright 2019 Google LLC
+ * Copyright 2018 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,17 +16,15 @@
 
 locals {
   int_required_roles = [
-    "roles/compute.admin",
+    "roles/storage.admin",
     "roles/iam.serviceAccountUser",
-    "roles/iam.serviceAccountAdmin",
-    "roles/resourcemanager.projectIamAdmin",
   ]
 }
 
 resource "google_service_account" "int_test" {
   project      = module.project.project_id
-  account_id   = "ci-account"
-  display_name = "ci-account"
+  account_id   = "ci-cloud-storage"
+  display_name = "ci-cloud-storage"
 }
 
 resource "google_project_iam_member" "int_test" {
