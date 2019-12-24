@@ -24,7 +24,7 @@ locals {
   shared_bucket = "shared-${var.project_id}-${var.env}-secrets"
   app_bucket    = substr("${var.project_id}-${var.application_name}-${var.env}-secrets", 0, 64)
   bucket_name   = var.shared ? local.shared_bucket : local.app_bucket
-  object_path   = length(regexall(".+[.](txt|json)$", var.secret)) > 0 ? var.secret : "${var.secret}.txt"
+  object_path   = length(regexall(".+[.](txt)$", var.secret)) > 0 ? var.secret : "${var.secret}.txt"
 }
 
 module "secret" {

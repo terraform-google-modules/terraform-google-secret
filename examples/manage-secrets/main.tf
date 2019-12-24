@@ -35,27 +35,38 @@ module "secret" {
   project_id = var.project_id
 }
 
-module "secret_json" {
+module "shared_secret" {
   source = "../../modules/create-secret"
 
   module_depends_on = module.secret-storage.shared-buckets
   application_name = ""
   env = "dev"
-  secret = "secret2.json"
-  content_file = "${path.module}/secrets/secret2.json"
+  secret = "secret2.txt"
+  content_file = "${path.module}/secrets/secret2.txt"
   shared = true
   project_id = var.project_id
 }
 
+// fetch secret
 module "fetch_secret" {
   source = "../.."
   application_name = "app1"
   env = "qa"
-  secret = module.secret_json.secret_name
+  secret = module.secret.secret_name
+  shared = false
+  project_id = var.project_id
+}
+
+module "fetch_shared_secret" {
+  source = "../.."
+  application_name = ""
+  env = "dev"
+  secret = module.shared_secret.secret_name
   shared = true
   project_id = var.project_id
 }
 
+
 output "content" {
-  value = module.fetch_secret.contents
+  value = module.fetch_shared_secret.contents
 }
