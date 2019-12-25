@@ -34,3 +34,6 @@ output "shared_secret" {
   value       = module.example.shared_secret
 }
 
+output "project_id" {
+  value = var.project_id
+}
