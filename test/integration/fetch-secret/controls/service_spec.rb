@@ -13,16 +13,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'rubygems'
 require 'json'
 
 # this is the prescribed way to create variables in test from terraform test outputs
 app_buckets = attribute('app-buckets')
 shared_buckets = attribute('shared-buckets')
-expected_app_list = attribute('app-list')
+app_list = attribute('app-list')
 expected_env_list = attribute('env-list')
 project_name = attribute('project-name')
 secret = attribute('mysecret')
+
+  application_list      = ["app1", "app2", "app3"]
+  env_list              = ["dev","qa","prod"]
+
+
+
+
 
 control "check app buckets" do
   describe 'App buckets' do
@@ -38,6 +44,8 @@ control "check app buckets" do
     end
   end
 end
+
+
 
 control "check shared buckets" do
   describe 'Shared buckets' do

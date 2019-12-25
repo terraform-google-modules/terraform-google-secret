@@ -14,19 +14,23 @@
  * limitations under the License.
  */
 
-output "secret1_name" {
+output "app_buckets" {
+  value       = module.example.app_buckets
+  description = "The lists of created application-specific buckets"
+}
+
+output "shared_buckets" {
+  value       = module.example.shared_buckets
+  description = "The lists of created shared buckets"
+}
+
+output "app_secret" {
   description = "The name of the secret1 to use in tests"
-  value       = module.example.secret1_name
+  value       = module.example.app_secret
 }
 
-output "content" {
-  value = module.example.content
+output "shared_secret" {
+  description = "The name of the secret1 to use in tests"
+  value       = module.example.shared_secret
 }
 
-output "test1" {
-  value = module.example.test1
-}
-
-output "test2" {
-  value = module.example.test2
-}
