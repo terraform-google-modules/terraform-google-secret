@@ -16,10 +16,10 @@
 
 // create infrastructure for secret-storages
 module "secret_storage" {
-  source                = "../../modules/secret-infrastructure"
-  project_id          = var.project_id
-  application_list      = ["app1", "app2", "app3"]
-  env_list              = ["dev","qa","prod"]
+  source           = "../../modules/secret-infrastructure"
+  project_id       = var.project_id
+  application_list = ["app1", "app2", "app3"]
+  env_list         = ["dev", "qa", "prod"]
 }
 
 // Create secrets
@@ -27,42 +27,42 @@ module "app_secret" {
   source = "../../modules/create-secret"
 
   module_depends_on = module.secret_storage.shared-buckets
-  application_name = "app1"
-  env = "qa"
-  secret = "secret1"
-  content_file = "${path.module}/secrets/secret1.txt"
-  shared = false
-  project_id = var.project_id
+  application_name  = "app1"
+  env               = "qa"
+  secret            = "secret1"
+  content_file      = "${path.module}/secrets/secret1.txt"
+  shared            = false
+  project_id        = var.project_id
 }
 
 module "shared_secret" {
   source = "../../modules/create-secret"
 
   module_depends_on = module.secret_storage.shared-buckets
-  application_name = ""
-  env = "dev"
-  secret = "secret2.txt"
-  content_file = "${path.module}/secrets/secret2.txt"
-  shared = true
-  project_id = var.project_id
+  application_name  = ""
+  env               = "dev"
+  secret            = "secret2.txt"
+  content_file      = "${path.module}/secrets/secret2.txt"
+  shared            = true
+  project_id        = var.project_id
 }
 
 // fetch secrets
 module "fetch_app_secret" {
-  source = "../.."
+  source           = "../.."
   application_name = "app1"
-  env = "qa"
-  secret = module.app_secret.secret_name
-  shared = false
-  project_id = var.project_id
+  env              = "qa"
+  secret           = module.app_secret.secret_name
+  shared           = false
+  project_id       = var.project_id
 }
 
 module "fetch_shared_secret" {
-  source = "../.."
+  source           = "../.."
   application_name = ""
-  env = "dev"
-  secret = module.shared_secret.secret_name
-  shared = true
-  project_id = var.project_id
+  env              = "dev"
+  secret           = module.shared_secret.secret_name
+  shared           = true
+  project_id       = var.project_id
 }
 

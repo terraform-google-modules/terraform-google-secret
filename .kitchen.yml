@@ -33,10 +33,10 @@ suites:
       name: terraform
       color: true
       systems:
-#        - name: inspec-gcp
-#          backend: gcp
-#          controls:
-#            - secrets-infrastrucure
+        - name: inspec-gcp
+          backend: gcp
+          controls:
+            - secrets-infrastrucure
         - name: local
           backend: local
           controls:

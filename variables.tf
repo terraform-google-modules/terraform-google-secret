@@ -38,5 +38,5 @@ variable "shared" {
 
 variable "project_id" {
   description = "The id of the project sectre buckets belong to"
-  type = string
+  type        = string
 }

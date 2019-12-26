@@ -15,6 +15,6 @@
  */
 
 module "example" {
-  source                = "../../../examples/manage-secrets"
-  project_id         = var.project_id
+  source     = "../../../examples/manage-secrets"
+  project_id = var.project_id
 }
