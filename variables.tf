@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-//variable "credentials_file_path" {
-//  description = "The path to the GCP credentials"
-//}
 
 variable "application_name" {
   description = "The application to fetch secrets for"

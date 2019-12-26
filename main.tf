@@ -17,8 +17,6 @@
 /******************************************
   Provider configuration
  *****************************************/
-provider "google" {
-}
 
 locals {
   shared_bucket = "shared-${var.project_id}-${var.env}-secrets"

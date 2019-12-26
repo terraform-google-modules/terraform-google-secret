@@ -14,13 +14,8 @@
  * limitations under the License.
  */
 
-locals {}
 
-/******************************************
-  Provider configuration
- *****************************************/
 provider "google" {
-  //  credentials = "${file(var.credentials_file_path)}"
 }
 
 resource "google_storage_bucket" "secrets" {

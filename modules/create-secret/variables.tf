@@ -15,15 +15,16 @@
  */
 
 variable "application_name" {
-  description = "The application to push secret for"
+  description = "The application to create secret for. Could be `null` for shared secrets"
+  default = null
 }
 
 variable "env" {
-  description = "The environment to push secret for"
+  description = "The environment to create secret for"
 }
 
 variable "secret" {
-  description = "The name of the secret to push"
+  description = "The name of the secret to create. The both forms `secret_name` and `secret_name.txt` are valid"
 }
 
 variable "content_file" {

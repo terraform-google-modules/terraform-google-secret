@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 variable "project_id" {
   description = "The id of the project to create buckets in"
 }

@@ -11,6 +11,6 @@ output "self_link" {
 }
 
 output "secret_name" {
-  description = "The name of the object. Use this field in interpolations with"
+  description = "The name of the object(file) the secret stored in"
   value       = google_storage_bucket_object.secret.output_name
 }

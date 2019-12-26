@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2018 Google LLC
  *
@@ -14,22 +15,10 @@
  * limitations under the License.
  */
 
-output "app_buckets" {
-  value       = module.secret_storage.app-buckets
-  description = "The lists of created application-specific buckets"
+terraform {
+  required_version = "~> 0.12.6"
 }
 
-output "shared_buckets" {
-  value       = module.secret_storage.shared-buckets
-  description = "The lists of created shared buckets"
-}
-
-output "app_secret" {
-  description = "The actual value of the requested app-secret"
-  value       = module.fetch_app_secret.contents
-}
-
-output "shared_secret" {
-  description = "The actual value of the requested shared secret"
-  value       = module.fetch_shared_secret.contents
+provider "google" {
+  version = "~> 2.13.0"
 }

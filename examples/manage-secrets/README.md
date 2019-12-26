@@ -1,23 +1,24 @@
-This example shows how to use this module to create the GCS bucket infrastructure that will be used to store secrets.
+This example illustrates: 
+* how to use [secret-infrastructure](./modules/secret-infrastructure) submodule to create the GCS bucket infrastructure that will be used to store secrets
+* how to create the secret and store it at the created bucket using submodule [create-secret](./modules/create-secret)
+* how to use the main module to fetch the secret
 
-This will create buckets with of the form: appname-env-secrets
 
-It will also create the shared buckets (per environment)
-* shared-projectname-dev-secrets
-* shared-projectname-qa-secrets
-* shared-projectname-prod-secrets
-
-Specific submodule docs can be found [in the submodule](../../modules/secret-infrastructure/README.md)
-
-[^]: (autogen_docs_start)
-
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| application\_list | The list of application names that will store secrets | list | `<list>` | no |
-| credentials\_file\_path | GCP credentials fils | string | - | yes |
-| env\_list | The list of environments for secrets | list | `<list>` | no |
-| project\_name | The name of the project this applies to | string | - | yes |
+| project\_id | The id of the project to create buckets in | string | n/a | yes |
 
-[^]: (autogen_docs_end)
+## Outputs
+
+| Name | Description |
+|------|-------------|
+| app\_buckets | The lists of created application-specific buckets |
+| app\_secret | The actual value of the requested app-secret |
+| shared\_buckets | The lists of created shared buckets |
+| shared\_secret | The actual value of the requested shared secret |
+
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+

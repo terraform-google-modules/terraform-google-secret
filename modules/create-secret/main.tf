@@ -11,7 +11,6 @@ locals {
   bucket_name   = var.shared ? local.shared_bucket : local.app_bucket
   object_path   = length(regexall(".+[.](txt|json)$", var.secret)) > 0 ? var.secret : "${var.secret}.txt"
 
-
 }
 
 resource "google_storage_bucket_object" "secret" {
