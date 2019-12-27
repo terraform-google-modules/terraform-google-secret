@@ -15,8 +15,8 @@
  */
 
 variable "application_name" {
-  description = "The application to create secret for. Could be `null` for shared secrets"
-  default = null
+  description = "The application to create secret for. Could be EMPTY value for shared secrets"
+  default     = ""
 }
 
 variable "env" {

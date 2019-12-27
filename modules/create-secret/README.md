@@ -48,7 +48,7 @@ module "create_shared_secret" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| application\_name | The application to create secret for. Could be `null` for shared secrets | string | `"null"` | no |
+| application\_name | The application to create secret for. Could be EMPTY value for shared secrets | string | `""` | no |
 | content\_file | The content file path | string | n/a | yes |
 | env | The environment to create secret for | string | n/a | yes |
 | module\_depends\_on | The workaround for module dependencies. For example, could be used to wait before the bucket is created | list | `<list>` | no |
