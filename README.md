@@ -105,6 +105,19 @@ Specific submodule docs can be found [in the submodule](./modules/create-secret/
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
+## Compatibility
+
+This module is meant for use with Terraform 0.12. If you haven't
+[upgraded][terraform-0.12-upgrade] and need a Terraform 0.11.x-compatible
+version of this module, the last released version intended for Terraform 0.11.x
+is [0.1.0][v0.1.0].
+
+## Upgrading
+
+The following guides are available to assist with upgrades:
+
+- [0.1.0 -> 1.0.0](./docs/upgrading_to_1.0.0.md)
+
 ## Requirements
 ### Installed Software
 - [Terraform](https://www.terraform.io/downloads.html) ~> 0.12.6
