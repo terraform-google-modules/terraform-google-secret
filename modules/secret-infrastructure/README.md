@@ -111,7 +111,6 @@ The test-kitchen instances in `test/fixtures/` wrap identically-named examples i
     ```bash
 	    docker build . -f Dockerfile -t ubuntu-test-kitchen-terraform --build-arg RANDOM_SUFFIX=$(shell openssl rand -hex 5) --build-arg PROJECT_NAME=sample-project-name --build-arg GOOGLE_APPLICATION_CREDENTIALS=service-account-credentials.json
     ```
-  
 4. This will build and run the kitchen tests for the module. If something fails, you might need to adjust the last line in the Dockerfile, as the image isn't fully built until that line passes.
 5. Remove the kitchen call as needed, then connect to the docker tag for debugging.
     ```bash
@@ -120,7 +119,7 @@ The test-kitchen instances in `test/fixtures/` wrap identically-named examples i
 
     The module root directory will be loaded into the Docker container at `/root/live_workspace/`.
     Run kitchen-terraform to test the infrastructure:
-    
+
     1. `kitchen create` creates Terraform state and downloads modules, if applicable.
     2. `kitchen converge` creates the underlying resources. Run `kitchen converge <INSTANCE_NAME>` to create resources for a specific test case.
     3. `kitchen verify` tests the created infrastructure. Run `kitchen verify <INSTANCE_NAME>` to run a specific test case.

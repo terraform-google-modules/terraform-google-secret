@@ -1,4 +1,4 @@
-This example illustrates: 
+This example illustrates:
 * how to use [secret-infrastructure](./modules/secret-infrastructure) submodule to create the GCS bucket infrastructure that will be used to store secrets
 * how to create the secret and store it at the created bucket using submodule [create-secret](./modules/create-secret)
 * how to use the main module to fetch the secret

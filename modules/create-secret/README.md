@@ -4,8 +4,8 @@ This submodule-helper isn't a part of the main `terraform-google-secret` module.
 It could be used to create a secret, but also secret could be created manual, by API call, by google SDK,
 or using [provided helper scripts](../../helpers/manage-secrets).
 
-The submodule store `secret` from file on already created by [secret-infrastructure submodule](./secret-infrastructure) bucket in file `secret.txt` . 
-To store secret is used bucket with name: 
+The submodule store `secret` from file on already created by [secret-infrastructure submodule](./secret-infrastructure) bucket in file `secret.txt` .
+To store secret is used bucket with name:
 * `${var.project_id}-${var.application_name-${var.env}-secrets` for application-specific secrets
 * `shared-${var.project_id}-${var.env}-secrets` for shared secrets.
 
@@ -19,7 +19,7 @@ Basic usage of this submodule is as follows:
 module "create_secret" {
   source  = "terraform-google-modules/secret/google//modules/create-secret"
   version = "1.0.0"
-  
+
   application_name  = "app1"
   env               = "qa"
   secret            = "secret1"
@@ -34,7 +34,7 @@ module "create_secret" {
 module "create_shared_secret" {
   source  = "terraform-google-modules/secret/google//modules/create-secret"
   version = "1.0.0"
-  
+
   env               = "dev"
   secret            = "secret2.txt"
   content_file      = "${path.module}/secrets/secret2.txt"

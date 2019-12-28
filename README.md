@@ -8,7 +8,7 @@ Note this is all on a per environment basis as well.
 ## Usage
 Examples are included in the [examples](./examples/) folder.
 
-There are three key operations, creating the buckets, storing the secret, and fetching a secret. 
+There are three key operations, creating the buckets, storing the secret, and fetching a secret.
 
 The base module is to fetch a secret from already created buckets. Submodules are for fetching a file from GCS, and creating the buckets.
 The bucket creation submodule is located at [./modules/secret-infrastructure](./modules/secret-infrastructure)
@@ -17,22 +17,21 @@ The secret creation submodule is located at [./modules/create-secret](./modules/
 More about `Setting secrets concepts` and scripts to help with, in [helpers/manage-secrets](./helpers/manage-secrets) directory.
 
 ### Fetching a secret
-A simple example to fetch a secret is as follows: 
+A simple example to fetch a secret is as follows:
 
 ```hcl
 module "fetch-secret" {
   source  = "terraform-google-modules/secret/google"
   version = "1.0.0"
-  
   project_id = "your-secret-storage-project"
   env = "dev"
   application_name = "app1"
-  secret = "api-key" 
+  secret = "api-key"
 //secret = "api-key.txt" <== is valid too
 
 }
 ```
- 
+
 
 ### Creating the buckets
 

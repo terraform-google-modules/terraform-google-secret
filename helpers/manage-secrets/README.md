@@ -6,15 +6,15 @@ The `helpers/manage-secrets` directory has a basic concept for setting secrets.
 The code is here doesn't run as-is (bucket names will need to be adjusted, etc), but is provided as a way to think about setting secrets.
 Conceptually, secrets are set manually by a team authorized to perform this work.
 
-The team would use the `helpers/manage-secrets/set-secrets.sh` script to set the secret (see [below](#setting-secrets)). 
+The team would use the `helpers/manage-secrets/set-secrets.sh` script to set the secret (see [below](#setting-secrets)).
 
-In this scenario, the GCS buckets are the source of truth. It might be necessary to have a list of the secrets stored in source control for auditability. See [jenkins](#jenkins-automation). 
+In this scenario, the GCS buckets are the source of truth. It might be necessary to have a list of the secrets stored in source control for auditability. See [jenkins](#jenkins-automation).
 
 ### File structure
 The helpers directory has the following folders and files:
 
 - helpers/manage-secrets/ - Contains the helper scripts for setting/clearing scripts (set/list/clear-secret.sh, set-secrets.sh)
-- helpers/manage-secrets/jenkins - Contains an example Jenkins Groovy for capturing defined secret names in source 
+- helpers/manage-secrets/jenkins - Contains an example Jenkins Groovy for capturing defined secret names in source
 
 
 ### Setting Secrets
@@ -65,7 +65,7 @@ A listing of all secrets managed by this module is generated with this command:
 ### Jenkins automation
 
 [./helpers/manage-secrets/jenkins](helpers/manage-secrets/jenkins) is a pipeline with the goal of having an up to date capture of the defined secrets in source. The groovy script is triggered in Jenkins (via cron).
-This script calls [list-secrets.sh](helpers/manage-secrets/list-secrets.sh), which fetches all the defined secrets. It then calls [commit-list.sh](helpers/manage-secrets/jenkins/commit-list.sh) to commit them to source control. All three of these files will need modification to work correctly in your environments. 
+This script calls [list-secrets.sh](helpers/manage-secrets/list-secrets.sh), which fetches all the defined secrets. It then calls [commit-list.sh](helpers/manage-secrets/jenkins/commit-list.sh) to commit them to source control. All three of these files will need modification to work correctly in your environments.
 
 ```
 ./helpers/manage-secrets/jenkins/default-update-secrets-list.groovy

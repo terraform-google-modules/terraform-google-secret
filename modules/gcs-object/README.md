@@ -12,7 +12,6 @@ Basic usage of this submodule is as follows:
 module "secret" {
   source  = "terraform-google-modules/secret/google//modules/gcs-object"
   version = "1.0.0"
-  
   bucket = "your-secret-storage-project-webapp-dev-secrets"
   path   = "webapp-secret1"
 }
