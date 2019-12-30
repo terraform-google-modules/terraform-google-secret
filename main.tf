@@ -23,7 +23,7 @@ provider "google" {
 
 locals {
   //  secret_project = "${var.project_name}"
-  shared_bucket = "shared-${var.env}-secrets"
+  shared_bucket = "shared-${var.project_name}-${var.env}-secrets"
   app_bucket    = "${var.application_name}-${var.env}-secrets"
   bucket_name   = "${var.shared == "true" ? local.shared_bucket : local.app_bucket}"
   object_path   = "${var.secret}.txt"
