@@ -14,27 +14,8 @@
  * limitations under the License.
  */
 
-variable "application_name" {
-  description = "The application to create secret for. Could be EMPTY value for shared secrets"
-  default     = ""
-}
-
-variable "env" {
-  description = "The environment to create secret for"
-}
-
-variable "secret" {
-  description = "The name of the secret to create. The both forms `secret_name` and `secret_name.txt` are valid"
-}
-
-variable "content_file" {
-  description = "The content file path"
-}
-
-variable "shared" {
-  description = "Will we push the secret to the shared bucket instead of an application-specific bucket?"
-  type        = bool
-  default     = false
+variable "secrets_file" {
+  description = "The path to `json` file with defined secrets. The json should be a list of objects with next keys: `secret_name`, `secret_value`, `application_name`, `env`, and `shared`"
 }
 
 variable "project_id" {

@@ -18,6 +18,7 @@ v1.0.0 is a backwards-incompatible release. Please see the [upgrading guide](./d
 ### Added
 
 - Added submodule `create-secret`. [#9]
+- Added submodule `create-secrets` [#9]
 - Used `for_each` instead of `count` for buckets iteration. [#8]
 - Added variable `project_id` to application-specific bucket name to ensure it's original.
 - Rewritten all test to check created resources not only terraform outputs.

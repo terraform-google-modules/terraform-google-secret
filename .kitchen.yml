@@ -42,3 +42,20 @@ suites:
           controls:
             - app-secret
             - shared-secret
+  - name: "create-multiply-secrets"
+    driver:
+      name: "terraform"
+      command_timeout: 1800
+      root_module_directory: test/fixtures/create-multiply-secrets/
+    verifier:
+      name: terraform
+      color: true
+      systems:
+        - name: inspec-gcp
+          backend: gcp
+          controls:
+            - secrets-infrastrucure
+        - name: local
+          backend: local
+          controls:
+            - secrets

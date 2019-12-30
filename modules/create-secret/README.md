@@ -52,7 +52,7 @@ module "create_shared_secret" {
 | content\_file | The content file path | string | n/a | yes |
 | env | The environment to create secret for | string | n/a | yes |
 | module\_depends\_on | The workaround for module dependencies. For example, could be used to wait before the bucket is created | list | `<list>` | no |
-| project\_id | The id of the project sectre buckets belong to | string | n/a | yes |
+| project\_id | The id of the project secret buckets belong to | string | n/a | yes |
 | secret | The name of the secret to create. The both forms `secret_name` and `secret_name.txt` are valid | string | n/a | yes |
 | shared | Will we push the secret to the shared bucket instead of an application-specific bucket? | bool | `"false"` | no |
 
