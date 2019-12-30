@@ -31,7 +31,8 @@ rm -rf "$ROOT_FOLDER"
 
 echo "Generating list of secrets in $ROOT_FOLDER"
 
-BUCKETS=$(gsutil ls -p "$SECRETS_PROJECT" )
+BUCKETS=$(gsutil ls -p "${SECRETS_PROJECT}" )
+
 [[ $? -ne 0 ]] && die 'ERROR: Failed to get buckets list'
 
 for BUCKET in $BUCKETS
@@ -49,6 +50,6 @@ do
 
     # Print contents of bucket
     BUCKET_ESCAPED=$(echo "$BUCKET" | sed -e 's/[]\/$*.^[]/\\&/g')
-    bucket_ls=$(gsutil ls "$BUCKET") || die "ERROR: Failed to get objects list from $BUCKET" 
+    bucket_ls=$(gsutil ls "$BUCKET") || die "ERROR: Failed to get objects list from $BUCKET"
     echo "$bucket_ls" | sed "s/$BUCKET_ESCAPED\(.*\).txt/\1/" >> "$FILE_PATH"
 done

@@ -69,7 +69,7 @@ docker_test_integration:
 docker_test_lint:
 	docker run --rm -it \
 		-v "$(CURDIR)":/workspace \
-		-e "EXCLUDE_LINT_DIRS":"(examples/manage-secrets/secrets|helpers/manage-secrets)" \
+		-e "EXCLUDE_LINT_DIRS":["examples/manage-secrets/secrets"] \
 		$(REGISTRY_URL)/${DOCKER_IMAGE_DEVELOPER_TOOLS}:${DOCKER_TAG_VERSION_DEVELOPER_TOOLS} \
 		/usr/local/bin/test_lint.sh
 
