@@ -1,0 +1,24 @@
+---
+name: manage-secrets
+title: Manage secrets and infrastructure
+version: 0.1.0
+depends:
+  - name: inspec-gcp
+    url: https://github.com/inspec/inspec-gcp/archive/v0.21.4.tar.gz
+attributes:
+- name: app_buckets
+  required: true
+  type: array
+- name: shared_buckets
+  required: true
+  type: array
+- name: project_id
+  required: true
+  type: string
+- name: app_secret
+  required: true
+  type: string
+- name: shared_secret
+  required: true
+  type: string
+

@@ -14,7 +14,19 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+// create infrastructure for secret-storages
+module "secret_storage" {
+  source           = "../../modules/secret-infrastructure"
+  project_id       = var.project_id
+  application_list = ["app1", "app100500"]
+  env_list         = ["dev", "qa", "prod"]
+}
+
+// Create secrets
+module "app_secret" {
+  source = "../../modules/create-secrets"
+
+  module_depends_on = module.secret_storage.shared-buckets
+  secrets_file      = "${path.module}/secrets.json"
+  project_id        = var.project_id
 }

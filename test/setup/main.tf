@@ -14,7 +14,20 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+module "project" {
+  source  = "terraform-google-modules/project-factory/google"
+  version = "~> 3.0"
+
+  name              = "ci-secrets"
+  random_project_id = "true"
+  org_id            = var.org_id
+  folder_id         = var.folder_id
+  billing_account   = var.billing_account
+
+  activate_apis = [
+    "storage-api.googleapis.com",
+    "cloudresourcemanager.googleapis.com",
+    "compute.googleapis.com",
+    "serviceusage.googleapis.com"
+  ]
 }

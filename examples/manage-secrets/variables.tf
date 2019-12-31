@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+variable "project_id" {
+  description = "The id of the project to create buckets in"
 }
+

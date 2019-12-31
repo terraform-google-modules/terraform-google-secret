@@ -1,3 +1,4 @@
+
 /**
  * Copyright 2018 Google LLC
  *
@@ -14,7 +15,10 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+terraform {
+  required_version = "~> 0.12.6"
+}
+
+provider "google" {
+  version = "~> 2.13.0"
 }

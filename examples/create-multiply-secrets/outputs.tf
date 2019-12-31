@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+output "app_buckets" {
+  value       = module.secret_storage.app-buckets
+  description = "The lists of created application-specific buckets"
+}
+
+output "shared_buckets" {
+  value       = module.secret_storage.shared-buckets
+  description = "The lists of created shared buckets"
 }

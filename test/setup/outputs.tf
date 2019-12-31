@@ -14,7 +14,11 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+output "project_id" {
+  value = module.project.project_id
+}
+
+output "sa_key" {
+  value = google_service_account_key.int_test.private_key
+  //  sensitive = true
 }

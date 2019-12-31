@@ -26,10 +26,7 @@ variable "env_list" {
   default     = []
 }
 
-variable "project_name" {
-  description = "The name of the project this applies to"
+variable "project_id" {
+  description = "The id of the project this applies to"
 }
 
-variable "credentials_file_path" {
-  description = "GCP credentials fils"
-}

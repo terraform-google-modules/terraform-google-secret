@@ -14,7 +14,17 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+variable "secrets_file" {
+  description = "The path to `json` file with defined secrets. The json should be a list of objects with next keys: `secret_name`, `secret_value`, `application_name`, `env`, and `shared`"
+}
+
+variable "project_id" {
+  description = "The id of the project secret buckets belong to"
+  type        = string
+}
+
+variable "module_depends_on" {
+  description = "The workaround for module dependencies. For example, could be used to wait before the bucket is created"
+  default     = []
+  type        = "list"
 }

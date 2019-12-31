@@ -14,7 +14,26 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+output "app_buckets" {
+  value       = module.example.app_buckets
+  description = "The lists of created application-specific buckets"
+}
+
+output "shared_buckets" {
+  value       = module.example.shared_buckets
+  description = "The lists of created shared buckets"
+}
+
+output "app_secret" {
+  description = "The name of the secret1 to use in tests"
+  value       = module.example.app_secret
+}
+
+output "shared_secret" {
+  description = "The name of the secret1 to use in tests"
+  value       = module.example.shared_secret
+}
+
+output "project_id" {
+  value = var.project_id
 }

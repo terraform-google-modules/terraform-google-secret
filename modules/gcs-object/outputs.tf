@@ -15,6 +15,6 @@
  */
 
 output "contents" {
-  description = "The contents of the requested GCS object"
-  value       = "${data.http.remote_contents.body}"
+  description = "The actual value of the requested secret"
+  value       = data.http.remote_contents.body
 }

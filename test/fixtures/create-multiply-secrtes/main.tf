@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-output "contents" {
-  description = "The actual value of the requested secret"
-  value       = module.secret.contents
+module "example" {
+  source     = "../../../examples/create-multiply-secrets"
+  project_id = var.project_id
 }
