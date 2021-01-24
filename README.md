@@ -19,14 +19,14 @@ The bucket creation submodule is located at [./modules/secret-infrastructure](./
 A simple example to fetch a secret is as follows: 
 
 ```hcl
-module "fetch-secret" {
+module "secret-fetch" {
   source  = "terraform-google-modules/secret/google"
   version = "0.1.0"
 
   env = "dev"
   application_name = "app1"
   secret = "api-key"
-  credentials_file_path = "sservice-account-credentials.json"
+  credentials_file_path = "service-account-credentials.json"
 }
 ```
 
@@ -44,7 +44,7 @@ module "secret-storage" {
   project_name = "your-secret-storage-project"
   application_list = ["webapp", "service1"]
   env_list = ["dev", "qa", "production"]
-  credentials_file_path = "service-account-creds.json"
+  credentials_file_path = "service-account-credentials.json"
 }
 ```
 
