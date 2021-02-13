@@ -16,6 +16,7 @@
 
 variable "credentials_file_path" {
   description = "The path to the GCP credentials"
+  default = null
 }
 
 variable "application_name" {
@@ -32,6 +33,6 @@ variable "secret" {
 
 variable "shared" {
   description = "Will we fetch the secret from the shared bucket instead of an application-specific bucket?"
-  type        = "string"
+  type        = string
   default     = "false"
 }
