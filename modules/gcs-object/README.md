@@ -12,9 +12,9 @@ See the living [barebones](./examples/barebones-test-fixture) test fixture examp
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| bucket | The bucket to fetch the object from | string | - | yes |
-| duration | The duration of the signed URL (defaults to 1m) | string | `1m` | no |
-| path | The path to the desired object within the bucket | string | - | yes |
+| bucket | The bucket to fetch the object from | string | n/a | yes |
+| duration | The duration of the signed URL (defaults to 1m) | string | `"1m"` | no |
+| path | The path to the desired object within the bucket | string | n/a | yes |
 
 ## Outputs
 

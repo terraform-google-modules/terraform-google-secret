@@ -22,6 +22,10 @@ variable "application_name" {
   description = "The application to fetch secrets for"
 }
 
+variable "project_name" {
+  description = "The name of the project"
+}
+
 variable "env" {
   description = "The environment to fetch secrets for"
 }

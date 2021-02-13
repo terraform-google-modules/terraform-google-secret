@@ -9,10 +9,10 @@ Specific submodule docs can be found [in the submodule](../../modules/gcs-object
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| application\_name | The application to fetch secrets for | string | - | yes |
-| credentials\_file\_path | GCP credentials fils | string | - | yes |
-| env | The environment to fetch secrets for | string | - | yes |
-| secret | The name of the secret to fetch | string | - | yes |
+| application\_name | The application to fetch secrets for | string | n/a | yes |
+| credentials\_file\_path | GCP credentials fils | string | n/a | yes |
+| env | The environment to fetch secrets for | string | n/a | yes |
+| secret | The name of the secret to fetch | string | n/a | yes |
 
 ## Outputs
 

@@ -16,8 +16,8 @@ Specific submodule docs can be found [in the submodule](../../modules/secret-inf
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
 | application\_list | The list of application names that will store secrets | list | `<list>` | no |
-| credentials\_file\_path | GCP credentials fils | string | - | yes |
+| credentials\_file\_path | GCP credentials fils | string | n/a | yes |
 | env\_list | The list of environments for secrets | list | `<list>` | no |
-| project\_name | The name of the project this applies to | string | - | yes |
+| project\_name | The name of the project this applies to | string | n/a | yes |
 
 [^]: (autogen_docs_end)
