@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-application_name="test_application"
-env="development"
-secret="api_key"
-shared="false"
+application_name      = "test_application"
+env                   = "development"
+secret                = "api_key"
+shared                = "false"
 credentials_file_path = "/Users/rishimalik/code/project-factory-service-account-credentials.json"
