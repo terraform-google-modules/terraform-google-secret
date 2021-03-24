@@ -30,7 +30,7 @@ provider "google" {
 resource "google_storage_bucket_object" "test-object" {
   name    = "test-secret.txt"
   content = "${local.file_content}"
-  bucket  = "${element(module.create-buckets.app-buckets,0)}"
+  bucket  = "${element(module.create-buckets.app-buckets, 0)}"
 }
 
 module "create-buckets" {

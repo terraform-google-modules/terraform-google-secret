@@ -1,5 +1,5 @@
 /**
- * Copyright 2018 Google LLC
+ * Copyright 2021 Google LLC
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,8 +14,18 @@
  * limitations under the License.
  */
 
-output "mysecret" {
-  description = "The actual value of the requested secret"
-  value       = "${module.mysecret.contents}"
-  sensitive   = true
+terraform {
+  required_version = ">= 0.13"
+  required_providers {
+
+    google = {
+      source  = "hashicorp/google"
+      version = "~> 3.53"
+    }
+  }
+
+  provider_meta "google" {
+    module_name = "blueprints/terraform/terraform-google-secret:secret-infrastructure/v1.0.0"
+  }
+
 }

@@ -8,7 +8,7 @@ Note this is all on a per environment basis as well.
 ## Usage
 Examples are included in the [examples](./examples/) folder.
 
-There are two key operations, creating the buckets, and fetching a secret. 
+There are two key operations, creating the buckets, and fetching a secret.
 Note that setting/storing a secret is a separate and out-of-band process. See [this readme for more information.](./modules/secret-infrastructure/infra/README.md)
 
 The base module is to fetch a secret from already created buckets. Submodules are for fetching a file from GCS, and creating the buckets.
@@ -16,7 +16,7 @@ The GCS fetching submodule is located at [./modules/secret-infrastructure](./mod
 The bucket creation submodule is located at [./modules/secret-infrastructure](./modules/secret-infrastructure)
 
 ### Fetching a secret
-A simple example to fetch a secret is as follows: 
+A simple example to fetch a secret is as follows:
 
 ```hcl
 module "secret-fetch" {
@@ -30,7 +30,7 @@ module "secret-fetch" {
 }
 ```
 
-Creating the bucket infrastructure is a submodule in this repo. 
+Creating the bucket infrastructure is a submodule in this repo.
 
 ### Creating the buckets
 
@@ -162,7 +162,7 @@ Alternatively, you can simply run `CREDENTIALS_FILE="credentials.json"  make tes
 Each test-kitchen instance is configured with a `terraform.tfvars` file in the test fixture directory, e.g. `test/fixtures/fetch-secret/terraform.tfvars`.
 Similarly, each test fixture has a `variables.tf` to define these variables, and an `outputs.tf` to facilitate providing necessary information for `inspec` to locate and query against created resources.
 
-For running the test fixture in docker `make test_integration_docker`, set the variable `credentials_file_path` to your filename as above, but with the path as follows 
+For running the test fixture in docker `make test_integration_docker`, set the variable `credentials_file_path` to your filename as above, but with the path as follows
 `credentials_file_path="/cftk/workdir/credentials.json`
 ``
 
@@ -209,17 +209,17 @@ command.
 In general, this repo is built to run in CI/CD. It's not usually appropriate to have the setting of secrets performed in that manner.
 
 The helpers/ directory has a basic concept for setting secrets. The code is here doesn't run as-is (bucket names will need to be adjusted, etc), but is provided as a way to think about setting secrets.
-Conceptually, secrets are set manually by a team authorized to perform this work. 
+Conceptually, secrets are set manually by a team authorized to perform this work.
 
-The team would use the `helpers/set-secrets.sh` script to set the secret (see [below](#setting-secrets)). 
+The team would use the `helpers/set-secrets.sh` script to set the secret (see [below](#setting-secrets)).
 
-In this scenario, the GCS buckets are the source of truth. It might be necessary to have a list of the secrets stored in source control for auditability. See [jenkins](#jenkins-automation). 
+In this scenario, the GCS buckets are the source of truth. It might be necessary to have a list of the secrets stored in source control for auditability. See [jenkins](#jenkins-automation).
 
 ### File structure
 The helpers directory has the following folders and files:
 
 - helpers/ - Contains the helper scripts for setting/clearing scripts (set/list/clear-secret.sh, set-secrets.sh)
-- helpers/jenkins - Contains an example Jenkins Groovy for capturing defined secret names in source 
+- helpers/jenkins - Contains an example Jenkins Groovy for capturing defined secret names in source
 
 
 ### Setting Secrets
@@ -270,7 +270,7 @@ A listing of all secrets managed by this module is generated with this command:
 ### Jenkins automation
 
 [./helpers/jenkins](./helpers/jenkins) is a pipeline with the goal of having an up to date capture of the defined secrets in source. The groovy script is triggered in Jenkins (via cron).
-This script calls [list-secrets.sh](./helpers/list-secrets.sh), which fetches all the defined secrets. It then calls [commit-list.sh](./helpers/jenkins/commit-list.sh) to commit them to source control. All three of these files will need modification to work correctly in your environments. 
+This script calls [list-secrets.sh](./helpers/list-secrets.sh), which fetches all the defined secrets. It then calls [commit-list.sh](./helpers/jenkins/commit-list.sh) to commit them to source control. All three of these files will need modification to work correctly in your environments.
 
 ```
 ./helpers/jenkins/default-update-secrets-list.groovy
