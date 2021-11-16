@@ -1,5 +1,9 @@
 # [Google Cloud Storage secret management Terraform Module](https://registry.terraform.io/modules/terraform-google-modules/secret/google/)
 
+## ⚠ Deprecated
+
+This module has been deprecated. Please use [Secret Manager](https://cloud.google.com/secret-manager) for managing secrets and associated [Terraform resources](https://registry.terraform.io/providers/hashicorp/google/latest/docs/resources/secret_manager_secret).
+
 This Terraform module makes it easier to manage to manage secrets for your Google Cloud environment, such as api keys, tokens, etc.
 
 Specifically, this repo provides modules to store secrets in app specific GCS buckets, shared buckets, and to fetch the secrets as needed.
