@@ -49,6 +49,6 @@ do
 
     # Print contents of bucket
     BUCKET_ESCAPED=$(echo "$BUCKET" | sed -e 's/[]\/$*.^[]/\\&/g')
-    bucket_ls=$(gsutil ls "$BUCKET") || die "ERROR: Failed to get objects list from $BUCKET" 
+    bucket_ls=$(gsutil ls "$BUCKET") || die "ERROR: Failed to get objects list from $BUCKET"
     echo "$bucket_ls" | sed "s/$BUCKET_ESCAPED\(.*\).txt/\1/" >> "$FILE_PATH"
 done
