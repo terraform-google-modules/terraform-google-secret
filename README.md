@@ -74,11 +74,12 @@ Specific submodule docs can be found [in the submodule](secret-infrastructure/RE
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| application\_name | The application to fetch secrets for | string | - | yes |
-| credentials\_file\_path | The path to the GCP credentials | string | - | yes |
-| env | The environment to fetch secrets for | string | - | yes |
-| secret | The name of the secret to fetch | string | - | yes |
-| shared | Will we fetch the secret from the shared bucket instead of an application-specific bucket? | string | `false` | no |
+| application\_name | The application to fetch secrets for | string | n/a | yes |
+| credentials\_file\_path | The path to the GCP credentials | string | n/a | yes |
+| env | The environment to fetch secrets for | string | n/a | yes |
+| project\_name | The name of the project | string | n/a | yes |
+| secret | The name of the secret to fetch | string | n/a | yes |
+| shared | Will we fetch the secret from the shared bucket instead of an application-specific bucket? | string | `"false"` | no |
 
 ## Outputs
 
