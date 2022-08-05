@@ -122,7 +122,7 @@ GEM
       train (~> 1.5, >= 1.5.11)
       tty-prompt (~> 0.17)
       tty-table (~> 0.10)
-    jmespath (1.4.0)
+    jmespath (1.6.1)
     json (2.1.0)
     jwt (2.1.0)
     kitchen-terraform (4.1.1)
